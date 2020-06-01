@@ -1,4 +1,4 @@
-"""Foxxer"""
+"""Foxer"""
 #Importando bibliotecas
 import os
 import sys
@@ -16,15 +16,15 @@ VERDE = (0, 255, 0)
 AZUL = (0, 0, 255)
 
 #Icone e nome
-icone = pygame.image.load(os.path.join("Imagens", "logo_raposa_(1).png"))
+icone = pygame.image.load(os.path.join("Imagens", "Icone.png"))
 pygame.display.set_icon(icone) 
-pygame.display.set_caption("Foxxer")
+pygame.display.set_caption("Foxer")
 
 #Criando Tela
 tela = pygame.display.set_mode((1200, 700))
 
 #Criando telas
-telainicial = pygame.image.load(os.path.join("Imagens", "Fundo_tela_inicial.png"))
+telainicial = pygame.image.load(os.path.join("Imagens", "Fundo_tela_inicial2.png"))
 #cenario1 = pygame.image.load(os.path.join("Imagens", "Cenario_1.png"))
 cenario2 = pygame.image.load(os.path.join("Imagens", "Cenario_2.png"))
 cenario3 = pygame.image.load(os.path.join("Imagens", "Cenario_3.png"))
