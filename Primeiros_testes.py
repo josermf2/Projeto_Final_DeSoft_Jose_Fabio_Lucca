@@ -23,8 +23,9 @@ pygame.display.set_caption("Foxer")
 #Criando Tela
 tela = pygame.display.set_mode((1200, 700))
 
-#Criando telas
-telainicial = pygame.image.load(os.path.join("Imagens", "Fundo_tela_inicial2.png"))
+#Imagens das telas
+telainicial1 = pygame.image.load(os.path.join("Imagens", "Fundo_tela_inicial1.png"))
+telainicial2 = pygame.image.load(os.path.join("Imagens", "Fundo_tela_inicial2.png"))
 #cenario1 = pygame.image.load(os.path.join("Imagens", "Cenario_1.png"))
 cenario2 = pygame.image.load(os.path.join("Imagens", "Cenario_2.png"))
 cenario3 = pygame.image.load(os.path.join("Imagens", "Cenario_3.png"))
@@ -32,12 +33,14 @@ cenario4 = pygame.image.load(os.path.join("Imagens", "Cenario_4.png"))
 cenario5 = pygame.image.load(os.path.join("Imagens", "Cenario_5.png"))
 
 """Classes"""
-"""
+
 class Raposa():
     
     def __init__(self):
         self.raposa = pygame.image.load(os.path.join("Imagens", "Raposa_1.png"))
 
+    
+"""
 class Skate():
 
 class RacingCar(): 
@@ -51,19 +54,23 @@ class Car1():
 class Car2():
 """ 
 
+relogio = pygame.time.Clock()
+
 """Game Loop"""
 #Loop para rodar o jogo
 rodando = True
 
 while rodando:
     
-    tela.fill(PRETO) #preenchendo tela
-    tela.blit(telainicial, (0, 0))
+    tela.fill(PRETO)
+    tela.blit(cenario2, (0,0))
 
     #Eventos do jogo
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT or (evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE): 
             rodando = False
             sys.exit()
+
+    relogio.tick(60)
 
     pygame.display.update() #atualizando a tela
