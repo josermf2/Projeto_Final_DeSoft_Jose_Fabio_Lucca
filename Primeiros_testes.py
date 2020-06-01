@@ -29,22 +29,15 @@ telainicial2 = pygame.image.load(os.path.join("Imagens", "Fundo_tela_inicial2.pn
 
 
 #Criando telas
-telainicial = pygame.image.load(os.path.join("Imagens", "Fundo_tela_inicial1.png"))
-#cenario1 = pygame.image.load(os.path.join("Imagens", "Cenario_1.png"))
-cenario2 = pygame.image.load(os.path.join("Imagens", "Cenario_2.png"))
-cenario3 = pygame.image.load(os.path.join("Imagens", "Cenario_3.png"))
-cenario4 = pygame.image.load(os.path.join("Imagens", "Cenario_4.png"))
-cenario5 = pygame.image.load(os.path.join("Imagens", "Cenario_5.png"))
+telainicial = pygame.image.load(os.path.join("Imagens", "Fundo_tela_inicial1.png")).convert()
+#cenario1 = pygame.image.load(os.path.join("Imagens", "Cenario_1.png")).convert()
+cenario2 = pygame.image.load(os.path.join("Imagens", "Cenario_2.png")).convert()
+
 
 """Classes"""
-
+'''
 class Raposa():
-    
-    def __init__(self):
-        self.raposa = pygame.image.load(os.path.join("Imagens", "Raposa_1.png"))
 
-    
-"""
 class Skate():
 
 class RacingCar(): 
@@ -56,7 +49,14 @@ class Caminhao():
 class Car1():
 
 class Car2():
-""" 
+'''
+
+"""Testes objetos"""
+car1img = pygame.image.load(os.path.join("Imagens", "Car1.png")).convert_alpha()
+xcar1 = 944
+ycar1 = 540
+def car(x, y):
+    tela.blit(car1img, (x, y))
 
 relogio = pygame.time.Clock()
 
@@ -74,7 +74,13 @@ while rodando:
         if evento.type == pygame.QUIT or (evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE): 
             rodando = False
             sys.exit()
+    
+    xcar1 += 10
+    ycar1 += 10
 
-    relogio.tick(60)
+    car(xcar1, ycar1)
 
     pygame.display.update() #atualizando a tela
+    
+    #relogio.tick(60)
+
