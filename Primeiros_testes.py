@@ -29,8 +29,8 @@ telainicial1 = pygame.image.load(os.path.join("Imagens", "Fundo_tela_inicial.png
 
 
 #Criando telas
-#cenario1 = pygame.image.load(os.path.join("Imagens", "Cenario_1.png")).convert()
-cenario2 = pygame.image.load(os.path.join("Imagens", "Cenario_2.png")).convert()
+cenario1 = pygame.image.load(os.path.join("Imagens", "opabeleza.png")).convert()
+#cenario2 = pygame.image.load(os.path.join("Imagens", "Cenario_2.png")).convert()
 
 
 """Classes"""
@@ -55,6 +55,10 @@ car1img = pygame.image.load(os.path.join("Imagens", "Car1.png")).convert_alpha()
 xcar1 = 944
 ycar1 = 540
 
+skateimg = pygame.image.load(os.path.join("Imagens", "RacingCar.png")).convert_alpha()
+xskate = 816
+yskate = 540
+
 relogio = pygame.time.Clock()
 
 """Game Loop"""
@@ -65,7 +69,7 @@ while rodando:
     
     deltat = relogio.tick(60)
     tela.fill(PRETO)
-    tela.blit(cenario2, (0,0))
+    tela.blit(cenario1, (0,0))
 
     #Eventos do jogo
     for evento in pygame.event.get():
@@ -75,6 +79,9 @@ while rodando:
     
     ycar1 -= 1*deltat
     tela.blit(car1img, (xcar1, ycar1))
+
+    yskate -= 1*deltat
+    tela.blit(skateimg, (xskate, yskate))
 
     pygame.display.update() #atualizando a tela
     
