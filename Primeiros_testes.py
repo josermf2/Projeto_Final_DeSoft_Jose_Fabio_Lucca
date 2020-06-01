@@ -24,7 +24,7 @@ pygame.display.set_caption("Foxer")
 tela = pygame.display.set_mode((1200, 700))
 
 #Criando telas
-telainicial = pygame.image.load(os.path.join("Imagens", "Fundo_tela_inicial2.png"))
+telainicial = pygame.image.load(os.path.join("Imagens", "Fundo_tela_inicial1.png"))
 #cenario1 = pygame.image.load(os.path.join("Imagens", "Cenario_1.png"))
 cenario2 = pygame.image.load(os.path.join("Imagens", "Cenario_2.png"))
 cenario3 = pygame.image.load(os.path.join("Imagens", "Cenario_3.png"))
