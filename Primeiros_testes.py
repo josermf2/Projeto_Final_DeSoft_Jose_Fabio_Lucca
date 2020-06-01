@@ -24,12 +24,11 @@ pygame.display.set_caption("Foxer")
 tela = pygame.display.set_mode((1200, 700))
 
 #Imagens das telas
-telainicial1 = pygame.image.load(os.path.join("Imagens", "Fundo_tela_inicial1.png"))
-telainicial2 = pygame.image.load(os.path.join("Imagens", "Fundo_tela_inicial2.png"))
+telainicial1 = pygame.image.load(os.path.join("Imagens", "Fundo_tela_inicial.png"))
+
 
 
 #Criando telas
-telainicial = pygame.image.load(os.path.join("Imagens", "Fundo_tela_inicial1.png")).convert()
 #cenario1 = pygame.image.load(os.path.join("Imagens", "Cenario_1.png")).convert()
 cenario2 = pygame.image.load(os.path.join("Imagens", "Cenario_2.png")).convert()
 
@@ -55,8 +54,6 @@ class Car2():
 car1img = pygame.image.load(os.path.join("Imagens", "Car1.png")).convert_alpha()
 xcar1 = 944
 ycar1 = 540
-def car(x, y):
-    tela.blit(car1img, (x, y))
 
 relogio = pygame.time.Clock()
 
@@ -66,6 +63,7 @@ rodando = True
 
 while rodando:
     
+    deltat = relogio.tick(60)
     tela.fill(PRETO)
     tela.blit(cenario2, (0,0))
 
@@ -75,12 +73,10 @@ while rodando:
             rodando = False
             sys.exit()
     
-    xcar1 += 10
-    ycar1 += 10
-
-    car(xcar1, ycar1)
+    ycar1 -= 1*deltat
+    tela.blit(car1img, (xcar1, ycar1))
 
     pygame.display.update() #atualizando a tela
     
-    #relogio.tick(60)
+    relogio.tick(60)
 
