@@ -146,7 +146,7 @@ def Rua1():
 
 raposa_objeto = Raposa([1072,286])
 cereja_objeto = Frutas([238,430])
-
+j = True
 
 """Game Loop"""
 #Loop para rodar o jogo
@@ -158,7 +158,11 @@ while rodando:
     tela.fill(PRETO)
     tela.blit(cenario1, (0,0))
 
-    tela.blit(raposaimg, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
+    if j == True:
+        tela.blit(raposaimg, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
+    else:
+        tela.blit(raposaimg, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
+
     tela.blit(cerejaimg, (cereja_objeto.posicaox,cereja_objeto.posicaoy))
     
 
@@ -174,8 +178,10 @@ while rodando:
                 raposa_objeto.desce_raposa()                
             if evento.key == pygame.K_RIGHT:
                 raposa_objeto.direita()
+                j = False
             if evento.key == pygame.K_LEFT:
                 raposa_objeto.esquerda()
+                j = True
 
     d = random.choice(lista0)
     if d == car1_pronto:
