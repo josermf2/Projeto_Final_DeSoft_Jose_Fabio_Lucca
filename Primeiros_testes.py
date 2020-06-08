@@ -94,11 +94,16 @@ class Automoveis:
 car1img = pygame.image.load(os.path.join("Imagens",'Car1.png')).convert_alpha()
 busaoimg = pygame.image.load(os.path.join("Imagens",'Busão.png')).convert_alpha()
 racingcarimg = pygame.image.load(os.path.join("Imagens",'RacingCar.png')).convert_alpha()
+car2img = pygame.image.load(os.path.join("Imagens",'Car2.png')).convert_alpha()
 raposaimg = pygame.image.load(os.path.join('Imagens','Raposa_1.png')).convert_alpha()
 cerejaimg =pygame.image.load(os.path.join('Imagens','Cereja.png')).convert_alpha()
 raposa2img = pygame.image.load(os.path.join('Imagens','Raposa_11.png')).convert_alpha()
 raposa3img = pygame.image.load(os.path.join('Imagens','Raposa_2.png')).convert_alpha()
 raposa4img = pygame.image.load(os.path.join('Imagens','Raposa_3.png')).convert_alpha()
+car1_invertidoimg = pygame.image.load(os.path.join("Imagens",'Car1_1.png')).convert_alpha()
+busao_invertidoimg = pygame.image.load(os.path.join("Imagens",'Busão2.png')).convert_alpha()
+racingcar_invertidoimg = pygame.image.load(os.path.join("Imagens",'RacingCar2.png')).convert_alpha()
+car2_invertidoimg = pygame.image.load(os.path.join("Imagens",'Car2_1.png')).convert_alpha()
 
 
 
