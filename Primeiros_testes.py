@@ -188,7 +188,8 @@ while rodando:
             if evento.key == pygame.K_LEFT:
                 raposa_objeto.esquerda()
                 j = True
-
+    
+    #Rua 1
     d = random.choice(lista0)
     if d == car1_pronto:
         tela.blit(car1img, (d.posicaox,d.posicaoy))
@@ -203,6 +204,7 @@ while rodando:
         tela.blit(racingcarimg, (d.posicaox,d.posicaoy))
         d.sobe_carro()
 
+    #Rua 3   
     g = random.choice(lista8)
     if g == car3_pronto:
         tela.blit(car1img, (g.posicaox,g.posicaoy))
