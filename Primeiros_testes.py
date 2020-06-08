@@ -4,6 +4,7 @@ import os
 import sys
 import pygame
 import random
+import math
 
 # x=90 y=56
 
@@ -58,7 +59,8 @@ class Frutas:
         self.posicaoy = posicao[1]
 
 def colisao(lista1,lista2):
-    if lista1[0] == lista2[0] and lista1[1] == lista2[1]:
+    distancia = math.sqrt((lista1[0]-lista2[0])**2 + (lista1[1]-lista2[1])**2)
+    if distancia <= 40:
         return True
     else:
         return False
@@ -157,7 +159,7 @@ class Rua6:
         self.carro = Automoveis(6)
         self.carro.movimentacao()   
 
-
+contador = 0
 
 raposaimg = pygame.image.load(os.path.join('Imagens','Raposa_1.png')).convert_alpha()
 abacaxiimg =pygame.image.load(os.path.join('Imagens','Abacaxi64.png')).convert_alpha()
@@ -183,8 +185,10 @@ raposa_objeto = Raposa([1072,286])
 abacaxi_objeto = Frutas([1088,636-64])
 j = True
 
-obj = Rua1()
-a = obj.carro
+obj1 = Rua1()
+a1 = obj1.carro
+obj2 = Rua1()
+a2 = obj2.carro  
 
 """Game Loop"""
 #Loop para rodar o jogo
@@ -220,24 +224,44 @@ while rodando:
                 raposa_objeto.esquerda()
                 j = True
     
-    colisao_abacaxi = colisao([raposa_objeto.posicaox,raposa_objeto.posicaoy], [abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy])
-    if colisao_abacaxi == True:
+
+    if colisao([raposa_objeto.posicaox,raposa_objeto.posicaoy], [abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy]) == True:
         score += 1
-        abacaxi_objeto = Frutas(random.choice(lista_abacaxi))
-        tela.blit(abacaxiimg, (abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy))  
+        #abacaxi_objeto.posicaox = 700
+        #abacaxi_objeto.posicaoy = 540
+        tela.blit(abacaxiimg, (700,64))  
     else:
         tela.blit(abacaxiimg, (abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy))
-
-    if a.posicaoy < -300:
-        a.posicaoy = 838 
-        obj = Rua1()
-        a = obj.carro
+    print(raposa_objeto.posicaox, raposa_objeto.posicaoy)
+    if a1.posicaoy < -300:
+        a1.posicaoy = 838 
+        obj1 = Rua1()
+        a1 = obj1.carro
     else:
-        a.movimentacao()
-    
-    tela.blit(a.imagem, (a.posicaox, a.posicaoy))
-    
+        a1.movimentacao()
+    print(abacaxi_objeto.posicaox, abacaxi_objeto.posicaoy)
 
+     
+
+  
+    tela.blit(a1.imagem, (a1.posicaox, a1.posicaoy))
+    
+    if contador <= 41:
+        obj2 = Rua1()
+        a2 = obj2.carro  
+        a2.movimentacao()
+    else:
+        a2.movimentacao()
+
+    '''    print(contador)
+    contador +=1
+    if contador == 145:
+        contador = 0
+    else:
+        pass
+    tela.blit(a2.imagem, (a2.posicaox, a2.posicaoy))'''
+
+    
     pygame.display.update() #atualizando a tela
     
     relogio.tick(60)
