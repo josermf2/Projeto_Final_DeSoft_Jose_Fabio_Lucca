@@ -33,7 +33,7 @@ telainicial1 = pygame.image.load(os.path.join("Imagens", "Fundo_tela_inicial.png
 
 
 #Criando telas
-cenario1 = pygame.image.load(os.path.join("Imagens", "opabeleza.png")).convert()
+cenario1 = pygame.image.load(os.path.join("Imagens", "Foxercenariofinal.png")).convert()
 #cenario2 = pygame.image.load(os.path.join("Imagens", "Cenario_2.png")).convert()
 
 
@@ -52,21 +52,7 @@ class Raposa():
         self.posicaox += 128
     def esquerda(self):
         self.posicaox -= 128
-'''class Skate():
 
-class RacingCar(): 
-
-class Busao():
-
-class Caminhao():
-class Car1():
-    def __init__(self):
-        self.carro = True
-carro_pronto = Car1()
-
-
-class Car2():
-'''
 class Frutas:
     def __init__(self,posicao):
         self.posicaox = posicao[0]
@@ -75,13 +61,7 @@ class Frutas:
 
 
 """Testes objetos"""
-lista1 = ['RacingCar.png', 'Busão.png']
-lista2 = [True,False]
-class Rua:
-    def __init__(self,posicao):
-        self.tem_ou_nao = random.choice(lista2)
-        self.posicao_x = posicao[0]
-        self.posicao_y = posicao[1]
+
 
 class Automoveis:
     def __init__(self,c):
