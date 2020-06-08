@@ -4,7 +4,7 @@ import os
 import sys
 import pygame
 import random
-#import numpy as np
+import numpy
 
 # x=90 y=56
 
@@ -58,7 +58,11 @@ class Frutas:
         self.posicaox = posicao[0]
         self.posicaoy = posicao[1]
 
-
+def colisao(lista1,lista2):
+    if lista1[0] == lista2[0] and lista1[1] == lista2[1]:
+        return True
+    else:
+        return False
 
 """Testes objetos"""
 
@@ -78,7 +82,7 @@ busaoimg = pygame.image.load(os.path.join("Imagens",'Busão.png')).convert_alpha
 racingcarimg = pygame.image.load(os.path.join("Imagens",'RacingCar.png')).convert_alpha()
 car2img = pygame.image.load(os.path.join("Imagens",'Car2.png')).convert_alpha()
 raposaimg = pygame.image.load(os.path.join('Imagens','Raposa_1.png')).convert_alpha()
-cerejaimg =pygame.image.load(os.path.join('Imagens','Cereja.png')).convert_alpha()
+abacaxiimg =pygame.image.load(os.path.join('Imagens','Abacaxi64.png')).convert_alpha()
 raposa2img = pygame.image.load(os.path.join('Imagens','Raposa_11.png')).convert_alpha()
 raposa3img = pygame.image.load(os.path.join('Imagens','Raposa_2.png')).convert_alpha()
 raposa4img = pygame.image.load(os.path.join('Imagens','Raposa_3.png')).convert_alpha()
@@ -90,12 +94,12 @@ car2_img = pygame.image.load(os.path.join("Imagens",'Car2_1.png')).convert_alpha
 
 
 relogio = pygame.time.Clock()
-i1 = [944,540]
-i2 = [816,0]
-i3 = [560,540]
-i4 = [432, 0]
-i5 = [304, 540]
-i6 = [176, 0]
+i1 = [944,838]
+i2 = [816,-128]
+i3 = [560,838]
+i4 = [432, -128]
+i5 = [304, 838]
+i6 = [176, -128]
 
 car1_pronto = Automoveis(i1)
 busao1_pronto = Automoveis(i1)
@@ -128,9 +132,23 @@ lista_objetos_rua3 = [car3_pronto,busao3_pronto,racingcar3_pronto]
 lista_objetos_rua4 = [car4_pronto,busao4_pronto,racingcar4_pronto]
 lista_objetos_rua5 = [car5_pronto,busao5_pronto,racingcar5_pronto]
 lista_objetos_rua6 = [car6_pronto,busao6_pronto,racingcar6_pronto]
+lista_abacaxix = numpy.arange(112,1216,128)
+lista_abacaxiy = numpy.arange(64,764,128)
+lista_abacaxi = []
 
-contador1 = 0
-contador2 = 0
+for i in lista_abacaxix:
+    for u in lista_abacaxiy:
+        lista_abacaxi.append([i,u])
+
+del lista_abacaxi([112,64])
+del lista_abacaxi([240,64])
+del lista_abacaxi([368,636])
+del lista_abacaxi([496,64])
+del lista_abacaxi([624,636])
+del lista_abacaxi([752,64])
+del lista_abacaxi([880,636])
+
+
 
 '''def Rua1():
     d = random.choice(lista0)
@@ -144,9 +162,9 @@ contador2 = 0
     else:
         return tela.blit(racingcarimg, (d.posicaox,d.posicaoy)), d.sobe_carro()'''
 
-
+score = 0
 raposa_objeto = Raposa([1072,286])
-cereja_objeto = Frutas([238,430])
+abacaxi_objeto = Frutas([1088,636-64])
 j = True
 
 """Game Loop"""
@@ -165,10 +183,7 @@ while rodando:
 
     else:
         tela.blit(raposa2img, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
-
-    tela.blit(cerejaimg, (cereja_objeto.posicaox,cereja_objeto.posicaoy))
     
-
     #Eventos do jogo
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT or (evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE): 
@@ -186,6 +201,16 @@ while rodando:
                 raposa_objeto.esquerda()
                 j = True
     
+    colisao_abacaxi = colisao([raposa_objeto.posicaox,raposa_objeto.posicaoy], [abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy])
+    if colisao_abacaxi == True:
+        score += 1
+        abacaxi_objeto = Frutas(random.choice(lista_abacaxi))
+        tela.blit(abacaxiimg, (abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy))  
+
+    else:
+        tela.blit(abacaxiimg, (abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy))
+
+
     #Rua 1
     rua1 = random.choice(lista_objetos_rua1)
     if rua1 == car1_pronto:
