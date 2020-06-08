@@ -97,6 +97,9 @@ racingcarimg = pygame.image.load(os.path.join("Imagens",'RacingCar.png')).conver
 raposaimg = pygame.image.load(os.path.join('Imagens','Raposa_1.png')).convert_alpha()
 cerejaimg =pygame.image.load(os.path.join('Imagens','Cereja.png')).convert_alpha()
 raposa2img = pygame.image.load(os.path.join('Imagens','Raposa_11.png')).convert_alpha()
+raposa3img = pygame.image.load(os.path.join('Imagens','Raposa_2.png')).convert_alpha()
+raposa4img = pygame.image.load(os.path.join('Imagens','Raposa_3.png')).convert_alpha()
+
 
 
 relogio = pygame.time.Clock()
@@ -155,12 +158,14 @@ rodando = True
 
 while rodando:
     deltat = relogio.tick(30)
-    print(deltat)
     tela.fill(PRETO)
     tela.blit(cenario1, (0,0))
 
     if j == True:
         tela.blit(raposaimg, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
+        tela.blit(raposa3img, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
+        tela.blit(raposa4img, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
+
     else:
         tela.blit(raposa2img, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
 
