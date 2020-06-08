@@ -65,8 +65,8 @@ def colisao(lista1,lista2):
         return False
 
 
-automoveis_baixo_cima = [car1, busao, racingcar, car2]
-automoveis_cima_baixo = [car1invertido, busaoinvertido, racingcarinvertido, car2invertido]
+automoveis_baixo_cima = ['car1', 'busao', 'racingcar', 'car2']
+automoveis_cima_baixo = ['car1invertido', 'busaoinvertido', 'racingcarinvertido', 'car2invertido']
 i1 = [944,838]
 i2 = [816,-128]
 i3 = [560,838]
@@ -82,24 +82,24 @@ class Automoveis:
 
     if rua == 1 or rua == 3 or rua == 5: 
         sprite == random.choice(automoveis_baixo_cima)
-        if sprite == car1:
+        if sprite == 'car1':
             imagem = pygame.image.load(os.path.join("Imagens",'Car1.png')).convert_alpha()
-        elif sprite == busao:
+        elif sprite == 'busao':
             imagem = pygame.image.load(os.path.join("Imagens",'Busão.png')).convert_alpha()
-        elif sprite == racingcar:
+        elif sprite == 'racingcar':
             imagem = pygame.image.load(os.path.join("Imagens",'RacingCar.png')).convert_alpha()
-        elif sprite == car2:
+        elif sprite == 'car2':
             imagem = pygame.image.load(os.path.join("Imagens",'Car2.png')).convert_alpha()
 
     elif rua == 2 or rua == 4 or rua == 6: 
         sprite == random.choice(automoveis_cima_baixo)
-        if sprite == car1invertido:
+        if sprite == 'car1invertido':
             imagem = pygame.image.load(os.path.join("Imagens",'Car1_1.png')).convert_alpha()
-        elif sprite == busaoinvertido:
+        elif sprite == 'busaoinvertido':
             imagem = pygame.image.load(os.path.join("Imagens",'Busão2.png')).convert_alpha()
-        elif sprite == racingcarinvertido:
+        elif sprite == 'racingcarinvertido':
             imagem = pygame.image.load(os.path.join("Imagens",'RacingCar2.png')).convert_alpha()
-        elif sprite == car2invertido:
+        elif sprite == 'car2invertido':
             imagem = pygame.image.load(os.path.join("Imagens",'Car2_1.png')).convert_alpha()
 
     if rua == 1:
