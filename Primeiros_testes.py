@@ -140,13 +140,6 @@ for i in lista_abacaxix:
     for u in lista_abacaxiy:
         lista_abacaxi.append([i,u])
 
-del lista_abacaxi([112,64])
-del lista_abacaxi([240,64])
-del lista_abacaxi([368,636])
-del lista_abacaxi([496,64])
-del lista_abacaxi([624,636])
-del lista_abacaxi([752,64])
-del lista_abacaxi([880,636])
 
 
 
