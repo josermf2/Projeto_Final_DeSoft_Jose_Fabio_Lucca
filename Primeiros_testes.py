@@ -38,7 +38,7 @@ cenario1 = pygame.image.load(os.path.join("Imagens", "Foxercenariofinal.png")).c
 
 
 """Classes"""
-##posicoesx = np.arange(0,1200,128)
+#posicoesx = np.arange(0,1200,128)
 #posicoesy = np.arange(0,700,64)
 class Raposa():
     def __init__(self,posicao):
@@ -64,43 +64,84 @@ def colisao(lista1,lista2):
     else:
         return False
 
-"""Testes objetos"""
 
-
-class Automoveis:
-    def __init__(self,c):
-        self.posicaox = c[0]
-        self.posicaoy = c[1]
-    def sobe_carro(self):
-        self.posicaoy -=10
-    def desce_carro(self):
-        self.posicaoy += 10
-
-
-car1img = pygame.image.load(os.path.join("Imagens",'Car1.png')).convert_alpha()
-busaoimg = pygame.image.load(os.path.join("Imagens",'Busão.png')).convert_alpha()
-racingcarimg = pygame.image.load(os.path.join("Imagens",'RacingCar.png')).convert_alpha()
-car2img = pygame.image.load(os.path.join("Imagens",'Car2.png')).convert_alpha()
-raposaimg = pygame.image.load(os.path.join('Imagens','Raposa_1.png')).convert_alpha()
-abacaxiimg =pygame.image.load(os.path.join('Imagens','Abacaxi64.png')).convert_alpha()
-raposa2img = pygame.image.load(os.path.join('Imagens','Raposa_11.png')).convert_alpha()
-raposa3img = pygame.image.load(os.path.join('Imagens','Raposa_2.png')).convert_alpha()
-raposa4img = pygame.image.load(os.path.join('Imagens','Raposa_3.png')).convert_alpha()
-car1_img = pygame.image.load(os.path.join("Imagens",'Car1_1.png')).convert_alpha()
-busao_img = pygame.image.load(os.path.join("Imagens",'Busão2.png')).convert_alpha()
-racingcar_img = pygame.image.load(os.path.join("Imagens",'RacingCar2.png')).convert_alpha()
-car2_img = pygame.image.load(os.path.join("Imagens",'Car2_1.png')).convert_alpha()
-
-
-
-relogio = pygame.time.Clock()
+automoveis_baixo_cima = [car1, busao, racingcar, car2]
+automoveis_cima_baixo = [car1invertido, busaoinvertido, racingcarinvertido, car2invertido]
 i1 = [944,838]
 i2 = [816,-128]
 i3 = [560,838]
 i4 = [432, -128]
 i5 = [304, 838]
 i6 = [176, -128]
+class Automoveis:
+    def __init__(self):
+        self.posicaox = 0
+        self.posicaoy = 0
+    
+    rua = random.randint(1, 6)
 
+    if rua == 1 or rua == 3 or rua == 5: 
+        sprite == random.choice(automoveis_baixo_cima)
+        if sprite == car1:
+            imagem = pygame.image.load(os.path.join("Imagens",'Car1.png')).convert_alpha()
+        elif sprite == busao:
+            imagem = pygame.image.load(os.path.join("Imagens",'Busão.png')).convert_alpha()
+        elif sprite == racingcar:
+            imagem = pygame.image.load(os.path.join("Imagens",'RacingCar.png')).convert_alpha()
+        elif sprite == car2:
+            imagem = pygame.image.load(os.path.join("Imagens",'Car2.png')).convert_alpha()
+
+    elif rua == 2 or rua == 4 or rua == 6: 
+        sprite == random.choice(automoveis_cima_baixo)
+        if sprite == car1invertido:
+            imagem = pygame.image.load(os.path.join("Imagens",'Car1_1.png')).convert_alpha()
+        elif sprite == busaoinvertido:
+            imagem = pygame.image.load(os.path.join("Imagens",'Busão2.png')).convert_alpha()
+        elif sprite == racingcarinvertido:
+            imagem = pygame.image.load(os.path.join("Imagens",'RacingCar2.png')).convert_alpha()
+        elif sprite == car2invertido:
+            imagem = pygame.image.load(os.path.join("Imagens",'Car2_1.png')).convert_alpha()
+
+    if rua == 1:
+        self.posicaox = i1[0]
+        self.posicaoy = i1[1]
+    
+    elif rua == 2:
+        self.posicaox = i2[0]
+        self.posicaoy = i2[1]
+            
+    elif rua == 3:
+        self.posicaox = i3[0]
+        self.posicaoy = i3[1]
+            
+    elif rua == 4:
+        self.posicaox = i4[0]
+        self.posicaoy = i4[1]
+            
+    elif rua == 5:
+        self.posicaox = i5[0]
+        self.posicaoy = i5[1]
+            
+    elif rua == 6:
+        self.posicaox = i6[0]
+        self.posicaoy = i6[1]
+
+    def sobe_carro(self):
+        self.posicaoy -=10
+    def desce_carro(self):
+        self.posicaoy += 10
+
+
+raposaimg = pygame.image.load(os.path.join('Imagens','Raposa_1.png')).convert_alpha()
+abacaxiimg =pygame.image.load(os.path.join('Imagens','Abacaxi64.png')).convert_alpha()
+raposa2img = pygame.image.load(os.path.join('Imagens','Raposa_11.png')).convert_alpha()
+raposa3img = pygame.image.load(os.path.join('Imagens','Raposa_2.png')).convert_alpha()
+raposa4img = pygame.image.load(os.path.join('Imagens','Raposa_3.png')).convert_alpha()
+
+
+relogio = pygame.time.Clock()
+
+'''
 car1_pronto = Automoveis(i1)
 busao1_pronto = Automoveis(i1)
 racingcar1_pronto = Automoveis(i1)
@@ -125,6 +166,7 @@ car6_pronto = Automoveis(i6)
 busao6_pronto = Automoveis(i6)
 racingcar6_pronto = Automoveis(i6)
 car26_pronto = Automoveis(i1)
+'''
 
 lista_objetos_rua1 = [car1_pronto,busao1_pronto,racingcar1_pronto]
 lista_objetos_rua2 = [car2_pronto,busao2_pronto,racingcar2_pronto]
@@ -203,7 +245,9 @@ while rodando:
     else:
         tela.blit(abacaxiimg, (abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy))
 
-
+    carro = Automoveis()
+    tela.blit(carro.imagem, (carro.posicaox, carro.posicaoy))
+    '''
     #Rua 1
     rua1 = random.choice(lista_objetos_rua1)
     if rua1 == car1_pronto:
@@ -306,9 +350,7 @@ while rodando:
     else:
         tela.blit(racingcar_img, (rua6.posicaox,rua6.posicaoy))
         rua6.desce_carro()
-
-    
-    
+    ''' 
 
     #xrua2 = 816
     #yrua2 += 10
