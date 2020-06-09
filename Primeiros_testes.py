@@ -26,7 +26,7 @@ pygame.display.set_icon(icone)
 pygame.display.set_caption("Foxer")
 
 #Criando Tela
-tela = pygame.display.set_mode((1200, 700))
+tela = pygame.display.set_mode((1200, 644))
 
 #Imagens das telas
 telainicial1 = pygame.image.load(os.path.join("Imagens", "Fundo_tela_inicial.png"))
@@ -61,16 +61,19 @@ class Frutas:
 
 def colisao(lista1,lista2):
     distancia = math.sqrt((lista1[0]-lista2[0])**2 + (lista1[1]-lista2[1])**2)
-    if distancia <= 80:
+
+    if distancia <= 74:
         return True
     else:
         return False
 
+score = 0
+myfont = pygame.font.SysFont('SuperMario256',80)
 '''lista_abacaxix = np.arange(112,1328,128)
 lista_abacaxiy = np.arange()
 '''
-automoveis_baixo_cima = ['car1', 'busao', 'racingcar', 'car2']
-automoveis_cima_baixo = ['car1invertido', 'busaoinvertido', 'racingcarinvertido', 'car2invertido']
+automoveis_baixo_cima = ['car1', 'busao', 'racingcar', 'car2', 'caminhão']
+automoveis_cima_baixo = ['car1invertido', 'busaoinvertido', 'racingcarinvertido', 'car2invertido','caminhãoinvertido']
 i1 = [944,838]
 i2 = [816,-128]
 i3 = [560,838]
@@ -79,7 +82,8 @@ i5 = [304, 838]
 i6 = [176, -128]
 
 class Automoveis:
-    def __init__(self, rua):
+    def __init__(self, rua,velocidade):
+        self.velocidade = velocidade
         self.rua = rua
         if  self.rua == 1:
             self.posicaox = i1[0]
@@ -114,6 +118,8 @@ class Automoveis:
                 self.imagem = pygame.image.load(os.path.join("Imagens",'RacingCar.png')).convert_alpha()
             elif sprite == 'car2':
                 self.imagem = pygame.image.load(os.path.join("Imagens",'Car2.png')).convert_alpha()
+            elif sprite == 'caminhão':
+                self.imagem = pygame.image.load(os.path.join("Imagens",'Caminhão.png')).convert_alpha()
         elif self.rua == 2 or self.rua == 4 or self.rua == 6: 
             sprite = random.choice(automoveis_cima_baixo)
             if sprite == 'car1invertido':
@@ -124,45 +130,53 @@ class Automoveis:
                 self.imagem = pygame.image.load(os.path.join("Imagens",'RacingCar2.png')).convert_alpha()
             elif sprite == 'car2invertido':
                 self.imagem = pygame.image.load(os.path.join("Imagens",'Car2_1.png')).convert_alpha()
+            elif sprite == 'caminhãoinvertido':
+                self.imagem = pygame.image.load(os.path.join("Imagens",'Caminhão2.png')).convert_alpha()                
     
     def movimentacao(self):
         if self.rua == 1 or self.rua == 3 or self.rua == 5: 
-            self.posicaoy -= random.randint(9,28)
+            self.posicaoy -= self.velocidade
         elif self.rua == 2 or self.rua == 4 or self.rua == 6: 
-            self.posicaoy += random.randint(9,28)
+            self.posicaoy += self.velocidade
 
 
 class Rua1:
-    def __init__(self):
-        self.carro = Automoveis(1)
+    def __init__(self,velocidade):
+        self.velocidade = velocidade
+        self.carro = Automoveis(1,velocidade)
         self.carro.movimentacao()
 
 class Rua2:
-    def __init__(self): 
-        self.carro = Automoveis(2)
+    def __init__(self,velocidade): 
+        self.velocidade = velocidade
+        self.carro = Automoveis(2,velocidade)
         self.carro.movimentacao()
 
 class Rua3:
-    def __init__(self): 
-        self.carro = Automoveis(3)
+    def __init__(self,velocidade): 
+        self.velocidade = velocidade
+        self.carro = Automoveis(3,velocidade)
         self.carro.movimentacao()
 
 class Rua4:
-    def __init__(self): 
-        self.carro = Automoveis(4)
+    def __init__(self,velocidade): 
+        self.velocidade = velocidade
+        self.carro = Automoveis(4,velocidade)
         self.carro.movimentacao() 
 
 class Rua5:
-    def __init__(self): 
-        self.carro = Automoveis(5)
+    def __init__(self,velocidade): 
+        self.velocidade = velocidade
+        self.carro = Automoveis(5,velocidade)
         self.carro.movimentacao()
 
 class Rua6:
-    def __init__(self): 
-        self.carro = Automoveis(6)
+    def __init__(self,velocidade): 
+        self.velocidade = velocidade
+        self.carro = Automoveis(6,velocidade)
         self.carro.movimentacao()   
 
-contador = 0
+
 
 raposaimg = pygame.image.load(os.path.join('Imagens','Raposa_1.png')).convert_alpha()
 abacaxiimg =pygame.image.load(os.path.join('Imagens','Abacaxi64.png')).convert_alpha()
@@ -174,31 +188,42 @@ raposa4img = pygame.image.load(os.path.join('Imagens','Raposa_3.png')).convert_a
 relogio = pygame.time.Clock()
 
 
-lista_abacaxix = np.arange(112,1216,128)
-lista_abacaxiy = np.arange(64,636,1)
+lista_abacaxix = np.arange(80,1216,128)
+lista_abacaxiy = np.arange(66,650,128)
 lista_abacaxi = []
 
 for i in lista_abacaxix:
     for u in lista_abacaxiy:
         lista_abacaxi.append([i,u])
+p=0
+while p < len(lista_abacaxi):
+    t = lista_abacaxi[p]
+    if t[1] == 66 and t[0] != 1104 and t[0] !=720 :
+        del lista_abacaxi[p]
+    elif t[1] == 578 and t[0] != 1104 and t[0] != 80 and t[0] != 720:
+        del lista_abacaxi[p]
+    else:
+        pass 
+    p +=1     
+print(lista_abacaxi)
 
-del lista_abacaxi[0]
-score = 0
-raposa_objeto = Raposa([1072,286])
-abacaxi_objeto = Frutas([1088,636-64])
+
+print(lista_abacaxi)
+raposa_objeto = Raposa([1072,0])
+abacaxi_objeto = Frutas(random.choice(lista_abacaxi))
 j = True
 
-obj1 = Rua1()
+obj1 = Rua1(random.randint(12,25))
 a1 = obj1.carro
-obj2 = Rua2()
+obj2 = Rua2(random.randint(12,25))
 a2 = obj2.carro
-obj3 = Rua3()
+obj3 = Rua3(random.randint(12,25))
 a3 = obj3.carro  
-obj4 = Rua4()
+obj4 = Rua4(random.randint(12,25))
 a4 = obj4.carro  
-obj5 = Rua5()
+obj5 = Rua5(random.randint(12,25))
 a5 = obj5.carro  
-obj6 = Rua6()
+obj6 = Rua6(random.randint(12,25))
 a6 = obj6.carro    
 
 """Game Loop"""
@@ -209,6 +234,8 @@ while rodando:
     deltat = relogio.tick(30)
     tela.fill(PRETO)
     tela.blit(cenario1, (0,0))
+    textsurface = myfont.render(str(score), False, PRETO)
+    tela.blit(textsurface,(90,56))
 
     if j == True:
         tela.blit(raposaimg, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
@@ -238,49 +265,56 @@ while rodando:
 
     if colisao([raposa_objeto.posicaox,raposa_objeto.posicaoy], [abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy]) == True:
         score += 1
-        abacaxi_objeto.posicaox = random.choice(lista_abacaxix)
-        abacaxi_objeto.posicaoy = random.choice(lista_abacaxiy)
+        o = random.choice(lista_abacaxi)
+        abacaxi_objeto.posicaox = o[0]
+        abacaxi_objeto.posicaoy = o[1]
 
     tela.blit(abacaxiimg, (abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy))
     
     if a1.posicaoy < -129:
+        velocidade = random.randint(12,25)        
         a1.posicaoy = 838 
-        obj1 = Rua1()
+        obj1 = Rua1(velocidade)
         a1 = obj1.carro
     else:
         a1.movimentacao()
 
     if a2.posicaoy > 829:
+        velocidade = random.randint(12,25)
         a2.posicaoy = -138 
-        obj2 = Rua2()
+        obj2 = Rua2(velocidade)
         a2 = obj2.carro
     else:
         a2.movimentacao()
 
     if a3.posicaoy < -129:
+        velocidade = random.randint(12,25)
         a3.posicaoy = 838 
-        obj3 = Rua3()
+        obj3 = Rua3(velocidade)
         a3 = obj3.carro
     else:
         a3.movimentacao()
 
     if a4.posicaoy > 829:
+        velocidade = random.randint(12,25)
         a4.posicaoy = -138 
-        obj4 = Rua4()
+        obj4 = Rua4(velocidade)
         a4 = obj4.carro
     else:
         a4.movimentacao()
 
     if a5.posicaoy < -129:
+        velocidade = random.randint(12,25)
         a5.posicaoy = 838 
-        obj5 = Rua5()
+        obj5 = Rua5(velocidade)
         a5 = obj5.carro
     else:
         a5.movimentacao()
 
     if a6.posicaoy > 829:
+        velocidade = random.randint(12,25)
         a6.posicaoy = -138 
-        obj6 = Rua6()
+        obj6 = Rua6(velocidade)
         a6 = obj6.carro
     else:
         a6.movimentacao()
