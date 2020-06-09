@@ -67,6 +67,21 @@ def colisao(lista1,lista2):
     else:
         return False
 
+def colisao_carros(lista1,lista2):
+    if lista1[0] == lista2[0] or lista1[0] + 64 == lista2[0] or lista1[0] == lista2[0] + 64 or lista1[0] + 64 == lista2[0] + 64:
+        if lista1[1] == lista2[1] or lista1[1] + 128 == lista2[1] or lista1[1] == lista2[1] + 128 or lista1[1] + 128 == lista2[1] + 128:
+            return True
+        else:
+            return False
+    else:
+        return False
+
+def colisao_carro(lista1,lista2):
+    distancia = math.sqrt((lista1[0]-lista2[0])**2 + (lista1[1]-lista2[1])**2)
+    if distancia <= 150:
+        return True
+    else:
+        return False
 score = 0
 myfont = pygame.font.SysFont('SuperMario256',90)
 '''lista_abacaxix = np.arange(112,1328,128)
@@ -187,10 +202,11 @@ raposa4img = pygame.image.load(os.path.join('Imagens','Raposa_3.png')).convert_a
 
 relogio = pygame.time.Clock()
 
-
+velocidade = [7,8,9,10]
 lista_abacaxix = np.arange(80,1216,128)
-lista_abacaxiy = np.arange(66,650,128)
+lista_abacaxiy = np.arange(34,650,128)
 lista_abacaxi = []
+v = 11
 
 for i in lista_abacaxix:
     for u in lista_abacaxiy:
@@ -198,9 +214,9 @@ for i in lista_abacaxix:
 p=0
 while p < len(lista_abacaxi):
     t = lista_abacaxi[p]
-    if t[1] == 66 and t[0] != 1104 and t[0] !=720 :
+    if t[1] == 34 and t[0] != 1104 and t[0] !=720 :
         del lista_abacaxi[p]
-    elif t[1] == 578 and t[0] != 1104 and t[0] != 80 and t[0] != 720:
+    elif t[1] == 546 and t[0] != 1104 and t[0] != 80 and t[0] != 720:
         del lista_abacaxi[p]
     else:
         pass 
@@ -210,17 +226,17 @@ raposa_objeto = Raposa([1072,258])
 abacaxi_objeto = Frutas(random.choice(lista_abacaxi))
 j = True
 
-obj1 = Rua1(random.randint(12,25))
+obj1 = Rua1(random.choice(velocidade))
 a1 = obj1.carro
-obj2 = Rua2(random.randint(12,25))
+obj2 = Rua2(random.choice(velocidade))
 a2 = obj2.carro
-obj3 = Rua3(random.randint(12,25))
+obj3 = Rua3(random.choice(velocidade))
 a3 = obj3.carro  
-obj4 = Rua4(random.randint(12,25))
+obj4 = Rua4(random.choice(velocidade))
 a4 = obj4.carro  
-obj5 = Rua5(random.randint(12,25))
+obj5 = Rua5(random.choice(velocidade))
 a5 = obj5.carro  
-obj6 = Rua6(random.randint(12,25))
+obj6 = Rua6(random.choice(velocidade))
 a6 = obj6.carro    
 
 """Game Loop"""
@@ -250,6 +266,10 @@ while rodando:
         if evento.type == pygame.KEYDOWN:
             if evento.key == pygame.K_UP:
                 raposa_objeto.sobe_raposa()
+                if raposa_objeto.posicaox == 48 and raposa_objeto.posicaoy == 2:
+                    raposa_objeto.desce_raposa()
+                else:
+                    pass
             if evento.key == pygame.K_DOWN:
                 raposa_objeto.desce_raposa()                
             if evento.key == pygame.K_RIGHT:
@@ -257,65 +277,69 @@ while rodando:
                 j = False
             if evento.key == pygame.K_LEFT:
                 raposa_objeto.esquerda()
+                if raposa_objeto.posicaox == 48 and raposa_objeto.posicaoy == 2:
+                    raposa_objeto.direita()
+                else:
+                    pass                
                 j = True
     
 
     if colisao([raposa_objeto.posicaox,raposa_objeto.posicaoy], [abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy]) == True:
         score += 1
+        if score%2 == 0 and score != 0 and velocidade[-1] < 30:
+                velocidade.append(v)
+                v += 1
         o = random.choice(lista_abacaxi)
         abacaxi_objeto.posicaox = o[0]
         abacaxi_objeto.posicaoy = o[1]
 
     
-    if a1.posicaoy < -129:
-        velocidade = random.randint(12,25)        
+    if a1.posicaoy < -129:        
         a1.posicaoy = 838 
-        obj1 = Rua1(velocidade)
+        obj1 = Rua1(random.choice(velocidade))
         a1 = obj1.carro
     else:
         a1.movimentacao()
 
     if a2.posicaoy > 829:
-        velocidade = random.randint(12,25)
         a2.posicaoy = -138 
-        obj2 = Rua2(velocidade)
+        obj2 = Rua2(random.choice(velocidade))
         a2 = obj2.carro
     else:
         a2.movimentacao()
 
     if a3.posicaoy < -129:
-        velocidade = random.randint(12,25)
         a3.posicaoy = 838 
-        obj3 = Rua3(velocidade)
+        obj3 = Rua3(random.choice(velocidade))
         a3 = obj3.carro
     else:
         a3.movimentacao()
 
     if a4.posicaoy > 829:
-        velocidade = random.randint(12,25)
         a4.posicaoy = -138 
-        obj4 = Rua4(velocidade)
+        obj4 = Rua4(random.choice(velocidade))
         a4 = obj4.carro
     else:
         a4.movimentacao()
 
     if a5.posicaoy < -129:
-        velocidade = random.randint(12,25)
         a5.posicaoy = 838 
-        obj5 = Rua5(velocidade)
+        obj5 = Rua5(random.choice(velocidade))
         a5 = obj5.carro
     else:
         a5.movimentacao()
 
     if a6.posicaoy > 829:
-        velocidade = random.randint(12,25)
         a6.posicaoy = -138 
-        obj6 = Rua6(velocidade)
+        obj6 = Rua6(random.choice(velocidade))
         a6 = obj6.carro
     else:
         a6.movimentacao()
 
-  
+    if colisao_carros([raposa_objeto.posicaox,raposa_objeto.posicaoy], [a6.posicaox,a6.posicaoy]) == True:
+        score +=1
+    
+    print(a6.posicaox,a6.posicaoy, raposa_objeto.posicaox,raposa_objeto.posicaoy)
     tela.blit(a1.imagem, (a1.posicaox, a1.posicaoy))
     tela.blit(a2.imagem, (a2.posicaox, a2.posicaoy))
     tela.blit(a3.imagem, (a3.posicaox, a3.posicaoy))
@@ -333,22 +357,8 @@ while rodando:
         raposa_objeto.posicaoy = 2
 
 
+
     tela.blit(abacaxiimg, (abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy))
-
-    '''if contador <= 41:
-        obj2 = Rua1()
-        a2 = obj2.carro  
-        a2.movimentacao()
-    else:
-        a2.movimentacao()
-
-    print(contador)
-    contador +=1
-    if contador == 145:
-        contador = 0
-    else:
-        pass
-    tela.blit(a2.imagem, (a2.posicaox, a2.posicaoy))'''
 
     
     pygame.display.update() #atualizando a tela
