@@ -45,14 +45,19 @@ class Raposa():
     def __init__(self,posicao):
         self.posicaox = posicao[0]
         self.posicaoy = posicao[1]
+        self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128, 128))
     def sobe_raposa(self):
         self.posicaoy -= 128
+        self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128, 128))
     def desce_raposa(self):
         self.posicaoy += 128
+        self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128, 128))
     def direita(self):
         self.posicaox += 128
+        self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128, 128))
     def esquerda(self):
         self.posicaox -= 128
+        self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128, 128))
 
 class Frutas:
     def __init__(self,posicao):
@@ -146,13 +151,17 @@ class Automoveis:
             elif sprite == 'car2invertido':
                 self.imagem = pygame.image.load(os.path.join("Imagens",'Car2_1.png')).convert_alpha()
             elif sprite == 'caminhãoinvertido':
-                self.imagem = pygame.image.load(os.path.join("Imagens",'Caminhão2.png')).convert_alpha()                
+                self.imagem = pygame.image.load(os.path.join("Imagens",'Caminhão2.png')).convert_alpha()   
+        self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128, 128))
     
     def movimentacao(self):
         if self.rua == 1 or self.rua == 3 or self.rua == 5: 
             self.posicaoy -= self.velocidade
+            self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128, 128))
         elif self.rua == 2 or self.rua == 4 or self.rua == 6: 
             self.posicaoy += self.velocidade
+            self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128, 128))
+    
 
 
 class Rua1:
@@ -336,10 +345,16 @@ while rodando:
     else:
         a6.movimentacao()
 
-    if colisao_carros([raposa_objeto.posicaox,raposa_objeto.posicaoy], [a6.posicaox,a6.posicaoy]) == True:
+    #if colisao_carros([raposa_objeto.posicaox,raposa_objeto.posicaoy], [a6.posicaox,a6.posicaoy]) == True:
+    #    score +=1
+    
+
+    e = raposa_objeto.retangulo
+    if e.colliderect(a6.retangulo):
         score +=1
     
-    print(a6.posicaox,a6.posicaoy, raposa_objeto.posicaox,raposa_objeto.posicaoy)
+
+    #print(a6.posicaox,a6.posicaoy, raposa_objeto.posicaox,raposa_objeto.posicaoy)
     tela.blit(a1.imagem, (a1.posicaox, a1.posicaoy))
     tela.blit(a2.imagem, (a2.posicaox, a2.posicaoy))
     tela.blit(a3.imagem, (a3.posicaox, a3.posicaoy))
