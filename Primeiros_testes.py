@@ -210,16 +210,17 @@ v = 11
 for i in lista_abacaxix:
     for u in lista_abacaxiy:
         lista_abacaxi.append([i,u])
-p=0
-while p < len(lista_abacaxi):
-    t = lista_abacaxi[p]
-    if t[1] == 34 and t[0] != 1104 and t[0] !=720 :
-        del lista_abacaxi[p]
-    elif t[1] == 546 and t[0] != 1104 and t[0] != 80 and t[0] != 720:
-        del lista_abacaxi[p]
-    else:
-        pass 
-    p +=1     
+
+
+del lista_abacaxi[0]
+del lista_abacaxi[4]
+del lista_abacaxi[12]
+del lista_abacaxi[12]
+del lista_abacaxi[20]
+del lista_abacaxi[25]
+del lista_abacaxi[33]
+
+print(lista_abacaxi)
 
 raposa_objeto = Raposa([1072,258])
 abacaxi_objeto = Frutas(random.choice(lista_abacaxi))
