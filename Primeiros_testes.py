@@ -241,9 +241,23 @@ a6 = obj6.carro
 
 """Game Loop"""
 #Loop para rodar o jogo
-rodando = True
+telainicial = True
+while telainicial:
+    for evento in pygame.event.get():
+        if evento.type == pygame.QUIT or (evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE): 
+            telainicial = False
+            sys.exit()
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_RETURN or evento.key == pygame.K_KP_ENTER:
+                telainicial = False        
 
-while rodando:
+    tela.fill(PRETO)
+    tela.blit(telainicial1, (0,0))
+    pygame.display.update() #atualizando a tela
+     
+
+jogo = True
+while jogo:
     deltat = relogio.tick(30)
     tela.fill(PRETO)
     tela.blit(cenario1, (0,0))
@@ -261,7 +275,7 @@ while rodando:
     #Eventos do jogo
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT or (evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE): 
-            rodando = False
+            jogo = False
             sys.exit()
         if evento.type == pygame.KEYDOWN:
             if evento.key == pygame.K_UP:
@@ -359,16 +373,22 @@ while rodando:
 
     if raposa_objeto.retangulo.colliderect(a1.retangulo):
         print("Game Over")
+        jogo = False
     elif raposa_objeto.retangulo.colliderect(a2.retangulo):
         print("Game Over")
+        jogo = False
     elif raposa_objeto.retangulo.colliderect(a3.retangulo):
         print("Game Over")
+        jogo = False
     elif raposa_objeto.retangulo.colliderect(a4.retangulo):
         print("Game Over")
+        jogo = False
     elif raposa_objeto.retangulo.colliderect(a5.retangulo):
         print("Game Over")
+        jogo = False
     elif raposa_objeto.retangulo.colliderect(a6.retangulo):
         print("Game Over")
+        jogo = False
 
 
     tela.blit(abacaxiimg, (abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy))
