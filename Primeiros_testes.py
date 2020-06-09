@@ -39,8 +39,7 @@ cenario1 = pygame.image.load(os.path.join("Imagens", "Foxercenariofinal.png")).c
 
 
 """Classes"""
-#posicoesx = np.arange(0,1200,128)
-#posicoesy = np.arange(0,700,64)
+
 class Raposa():
     def __init__(self,posicao):
         self.posicaox = posicao[0]
@@ -72,26 +71,9 @@ def colisao(lista1,lista2):
     else:
         return False
 
-def colisao_carros(lista1,lista2):
-    if lista1[0] == lista2[0] or lista1[0] + 64 == lista2[0] or lista1[0] == lista2[0] + 64 or lista1[0] + 64 == lista2[0] + 64:
-        if lista1[1] == lista2[1] or lista1[1] + 128 == lista2[1] or lista1[1] == lista2[1] + 128 or lista1[1] + 128 == lista2[1] + 128:
-            return True
-        else:
-            return False
-    else:
-        return False
-
-def colisao_carro(lista1,lista2):
-    distancia = math.sqrt((lista1[0]-lista2[0])**2 + (lista1[1]-lista2[1])**2)
-    if distancia <= 150:
-        return True
-    else:
-        return False
 score = 0
 myfont = pygame.font.SysFont('SuperMario256',90)
-'''lista_abacaxix = np.arange(112,1328,128)
-lista_abacaxiy = np.arange()
-'''
+
 automoveis_baixo_cima = ['car1', 'busao', 'racingcar', 'car2', 'caminhão']
 automoveis_cima_baixo = ['car1invertido', 'busaoinvertido', 'racingcarinvertido', 'car2invertido','caminhãoinvertido']
 i1 = [944,838]
@@ -132,36 +114,44 @@ class Automoveis:
             sprite = random.choice(automoveis_baixo_cima)
             if sprite == 'car1':
                 self.imagem = pygame.image.load(os.path.join("Imagens",'Car1.png')).convert_alpha()
+                self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128, 170))
             elif sprite == 'busao':
                 self.imagem = pygame.image.load(os.path.join("Imagens",'Busão.png')).convert_alpha()
+                self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128, 212))
             elif sprite == 'racingcar':
                 self.imagem = pygame.image.load(os.path.join("Imagens",'RacingCar.png')).convert_alpha()
+                self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128, 184))
             elif sprite == 'car2':
                 self.imagem = pygame.image.load(os.path.join("Imagens",'Car2.png')).convert_alpha()
+                self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128, 178))
             elif sprite == 'caminhão':
                 self.imagem = pygame.image.load(os.path.join("Imagens",'Caminhão.png')).convert_alpha()
+                self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128, 180))
         elif self.rua == 2 or self.rua == 4 or self.rua == 6: 
             sprite = random.choice(automoveis_cima_baixo)
             if sprite == 'car1invertido':
                 self.imagem = pygame.image.load(os.path.join("Imagens",'Car1_1.png')).convert_alpha()
+                self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128, 170))
             elif sprite == 'busaoinvertido':
                 self.imagem = pygame.image.load(os.path.join("Imagens",'Busão2.png')).convert_alpha()
+                self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128, 212))
             elif sprite == 'racingcarinvertido':
                 self.imagem = pygame.image.load(os.path.join("Imagens",'RacingCar2.png')).convert_alpha()
+                self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128, 184))
             elif sprite == 'car2invertido':
                 self.imagem = pygame.image.load(os.path.join("Imagens",'Car2_1.png')).convert_alpha()
+                self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128, 178))
             elif sprite == 'caminhãoinvertido':
-                self.imagem = pygame.image.load(os.path.join("Imagens",'Caminhão2.png')).convert_alpha()   
-        self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128, 128))
+                self.imagem = pygame.image.load(os.path.join("Imagens",'Caminhão2.png')).convert_alpha()
+                self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128, 180))   
     
     def movimentacao(self):
         if self.rua == 1 or self.rua == 3 or self.rua == 5: 
             self.posicaoy -= self.velocidade
-            self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128, 128))
+            self.retangulo.top = self.posicaoy 
         elif self.rua == 2 or self.rua == 4 or self.rua == 6: 
             self.posicaoy += self.velocidade
-            self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128, 128))
-    
+            self.retangulo.top = self.posicaoy 
 
 
 class Rua1:
@@ -292,7 +282,6 @@ while rodando:
                     pass                
                 j = True
     
-
     if colisao([raposa_objeto.posicaox,raposa_objeto.posicaoy], [abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy]) == True:
         score += 1
         if score%2 == 0 and score != 0 and velocidade[-1] < 30:
@@ -349,10 +338,6 @@ while rodando:
     #    score +=1
     
 
-    e = raposa_objeto.retangulo
-    if e.colliderect(a6.retangulo):
-        score +=1
-    
 
     #print(a6.posicaox,a6.posicaoy, raposa_objeto.posicaox,raposa_objeto.posicaoy)
     tela.blit(a1.imagem, (a1.posicaox, a1.posicaoy))
@@ -371,11 +356,22 @@ while rodando:
     elif raposa_objeto.posicaoy < 0:
         raposa_objeto.posicaoy = 2
 
+    if raposa_objeto.retangulo.colliderect(a1.retangulo):
+        print("Game Over")
+    elif raposa_objeto.retangulo.colliderect(a2.retangulo):
+        print("Game Over")
+    elif raposa_objeto.retangulo.colliderect(a3.retangulo):
+        print("Game Over")
+    elif raposa_objeto.retangulo.colliderect(a4.retangulo):
+        print("Game Over")
+    elif raposa_objeto.retangulo.colliderect(a5.retangulo):
+        print("Game Over")
+    elif raposa_objeto.retangulo.colliderect(a6.retangulo):
+        print("Game Over")
 
 
     tela.blit(abacaxiimg, (abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy))
 
-    
     pygame.display.update() #atualizando a tela
     
     relogio.tick(60)
