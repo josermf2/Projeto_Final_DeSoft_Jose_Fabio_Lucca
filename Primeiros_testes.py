@@ -206,7 +206,7 @@ while p < len(lista_abacaxi):
         pass 
     p +=1     
 
-raposa_objeto = Raposa([1072,0])
+raposa_objeto = Raposa([1072,258])
 abacaxi_objeto = Frutas(random.choice(lista_abacaxi))
 j = True
 
@@ -326,11 +326,12 @@ while rodando:
     if raposa_objeto.posicaox > 1072:
         raposa_objeto.posicaox = 1072
     elif raposa_objeto.posicaoy > 516:
-        raposa_objeto.posicaoy = 516
+        raposa_objeto.posicaoy = 514
     elif raposa_objeto.posicaox < 48:
         raposa_objeto.posicaox = 48 
     elif raposa_objeto.posicaoy < 0:
-        raposa_objeto.posicaoy = 0 
+        raposa_objeto.posicaoy = 2
+
 
     tela.blit(abacaxiimg, (abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy))
 
