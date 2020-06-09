@@ -5,6 +5,7 @@ import sys
 import pygame
 import random
 import math
+import numpy as np
 
 # x=90 y=56
 
@@ -60,12 +61,14 @@ class Frutas:
 
 def colisao(lista1,lista2):
     distancia = math.sqrt((lista1[0]-lista2[0])**2 + (lista1[1]-lista2[1])**2)
-    if distancia <= 40:
+    if distancia <= 80:
         return True
     else:
         return False
 
-
+'''lista_abacaxix = np.arange(112,1328,128)
+lista_abacaxiy = np.arange()
+'''
 automoveis_baixo_cima = ['car1', 'busao', 'racingcar', 'car2']
 automoveis_cima_baixo = ['car1invertido', 'busaoinvertido', 'racingcarinvertido', 'car2invertido']
 i1 = [944,838]
@@ -124,9 +127,9 @@ class Automoveis:
     
     def movimentacao(self):
         if self.rua == 1 or self.rua == 3 or self.rua == 5: 
-            self.posicaoy -=10
+            self.posicaoy -= random.randint(9,28)
         elif self.rua == 2 or self.rua == 4 or self.rua == 6: 
-            self.posicaoy += 10
+            self.posicaoy += random.randint(9,28)
 
 
 class Rua1:
@@ -171,15 +174,15 @@ raposa4img = pygame.image.load(os.path.join('Imagens','Raposa_3.png')).convert_a
 relogio = pygame.time.Clock()
 
 
-#lista_abacaxix = numpy.arange(112,1216,128)
-#lista_abacaxiy = numpy.arange(64,764,128)
-#lista_abacaxi = []
+lista_abacaxix = np.arange(112,1216,128)
+lista_abacaxiy = np.arange(64,636,1)
+lista_abacaxi = []
 
-#for i in lista_abacaxix:
-#    for u in lista_abacaxiy:
-#        lista_abacaxi.append([i,u])
+for i in lista_abacaxix:
+    for u in lista_abacaxiy:
+        lista_abacaxi.append([i,u])
 
-
+del lista_abacaxi[0]
 score = 0
 raposa_objeto = Raposa([1072,286])
 abacaxi_objeto = Frutas([1088,636-64])
@@ -187,8 +190,16 @@ j = True
 
 obj1 = Rua1()
 a1 = obj1.carro
-obj2 = Rua1()
-a2 = obj2.carro  
+obj2 = Rua2()
+a2 = obj2.carro
+obj3 = Rua3()
+a3 = obj3.carro  
+obj4 = Rua4()
+a4 = obj4.carro  
+obj5 = Rua5()
+a5 = obj5.carro  
+obj6 = Rua6()
+a6 = obj6.carro    
 
 """Game Loop"""
 #Loop para rodar o jogo
@@ -227,33 +238,69 @@ while rodando:
 
     if colisao([raposa_objeto.posicaox,raposa_objeto.posicaoy], [abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy]) == True:
         score += 1
-        #abacaxi_objeto.posicaox = 700
-        #abacaxi_objeto.posicaoy = 540
-        tela.blit(abacaxiimg, (700,64))  
-    else:
-        tela.blit(abacaxiimg, (abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy))
-    print(raposa_objeto.posicaox, raposa_objeto.posicaoy)
-    if a1.posicaoy < -300:
+        abacaxi_objeto.posicaox = random.choice(lista_abacaxix)
+        abacaxi_objeto.posicaoy = random.choice(lista_abacaxiy)
+
+    tela.blit(abacaxiimg, (abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy))
+    
+    if a1.posicaoy < -129:
         a1.posicaoy = 838 
         obj1 = Rua1()
         a1 = obj1.carro
     else:
         a1.movimentacao()
-    print(abacaxi_objeto.posicaox, abacaxi_objeto.posicaoy)
 
-     
+    if a2.posicaoy > 829:
+        a2.posicaoy = -138 
+        obj2 = Rua2()
+        a2 = obj2.carro
+    else:
+        a2.movimentacao()
+
+    if a3.posicaoy < -129:
+        a3.posicaoy = 838 
+        obj3 = Rua3()
+        a3 = obj3.carro
+    else:
+        a3.movimentacao()
+
+    if a4.posicaoy > 829:
+        a4.posicaoy = -138 
+        obj4 = Rua4()
+        a4 = obj4.carro
+    else:
+        a4.movimentacao()
+
+    if a5.posicaoy < -129:
+        a5.posicaoy = 838 
+        obj5 = Rua5()
+        a5 = obj5.carro
+    else:
+        a5.movimentacao()
+
+    if a6.posicaoy > 829:
+        a6.posicaoy = -138 
+        obj6 = Rua6()
+        a6 = obj6.carro
+    else:
+        a6.movimentacao()
 
   
     tela.blit(a1.imagem, (a1.posicaox, a1.posicaoy))
+    tela.blit(a2.imagem, (a2.posicaox, a2.posicaoy))
+    tela.blit(a3.imagem, (a3.posicaox, a3.posicaoy))
+    tela.blit(a4.imagem, (a4.posicaox, a4.posicaoy))
+    tela.blit(a5.imagem, (a5.posicaox, a5.posicaoy))
+    tela.blit(a6.imagem, (a6.posicaox, a6.posicaoy))
     
-    if contador <= 41:
+    '''if contador <= 41:
         obj2 = Rua1()
         a2 = obj2.carro  
         a2.movimentacao()
     else:
         a2.movimentacao()
 
-    '''    print(contador)
+    print(contador)
     contador +=1
     if contador == 145:
         contador = 0
