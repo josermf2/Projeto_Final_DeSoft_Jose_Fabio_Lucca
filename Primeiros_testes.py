@@ -266,7 +266,6 @@ while rodando:
         abacaxi_objeto.posicaox = o[0]
         abacaxi_objeto.posicaoy = o[1]
 
-    tela.blit(abacaxiimg, (abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy))
     
     if a1.posicaoy < -129:
         velocidade = random.randint(12,25)        
@@ -324,6 +323,17 @@ while rodando:
     tela.blit(a5.imagem, (a5.posicaox, a5.posicaoy))
     tela.blit(a6.imagem, (a6.posicaox, a6.posicaoy))
     
+    if raposa_objeto.posicaox > 1072:
+        raposa_objeto.posicaox = 1072
+    elif raposa_objeto.posicaoy > 516:
+        raposa_objeto.posicaoy = 516
+    elif raposa_objeto.posicaox < 48:
+        raposa_objeto.posicaox = 48 
+    elif raposa_objeto.posicaoy < 0:
+        raposa_objeto.posicaoy = 0 
+
+    tela.blit(abacaxiimg, (abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy))
+
     '''if contador <= 41:
         obj2 = Rua1()
         a2 = obj2.carro  
