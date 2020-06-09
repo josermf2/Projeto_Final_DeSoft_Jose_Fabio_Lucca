@@ -68,7 +68,7 @@ def colisao(lista1,lista2):
         return False
 
 score = 0
-myfont = pygame.font.SysFont('SuperMario256',80)
+myfont = pygame.font.SysFont('SuperMario256',90)
 '''lista_abacaxix = np.arange(112,1328,128)
 lista_abacaxiy = np.arange()
 '''
@@ -205,10 +205,7 @@ while p < len(lista_abacaxi):
     else:
         pass 
     p +=1     
-print(lista_abacaxi)
 
-
-print(lista_abacaxi)
 raposa_objeto = Raposa([1072,0])
 abacaxi_objeto = Frutas(random.choice(lista_abacaxi))
 j = True
@@ -235,7 +232,7 @@ while rodando:
     tela.fill(PRETO)
     tela.blit(cenario1, (0,0))
     textsurface = myfont.render(str(score), False, PRETO)
-    tela.blit(textsurface,(90,56))
+    tela.blit(textsurface,(70,60))
 
     if j == True:
         tela.blit(raposaimg, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
