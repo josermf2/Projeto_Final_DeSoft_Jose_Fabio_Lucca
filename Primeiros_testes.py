@@ -414,7 +414,6 @@ while Foxer:
                 if evento.key == pygame.K_RETURN or evento.key == pygame.K_KP_ENTER:
                     abacaxi_objeto = Frutas(random.choice(lista_abacaxi))
                     game_over = False 
-        print(velocidade) 
         
         tela.fill(PRETO)
         tela.blit(telafinal,(0,0))        
