@@ -45,6 +45,7 @@ class Raposa():
     def __init__(self,posicao):
         self.posicaox = posicao[0]
         self.posicaoy = posicao[1]
+        self.vida = 3
         self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128, 128))
     def sobe_raposa(self):
         self.posicaoy -= 128
@@ -221,7 +222,6 @@ del lista_abacaxi[20]
 del lista_abacaxi[25]
 del lista_abacaxi[33]
 
-print(lista_abacaxi)
 
 raposa_objeto = Raposa([1072,258])
 abacaxi_objeto = Frutas(random.choice(lista_abacaxi))
@@ -290,8 +290,11 @@ while Foxer:
 
         if j == True and raposa_objeto.posicaox != 48:
             tela.blit(raposaimg, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
+        elif j == False and raposa_objeto.posicaox == 1072:
+            tela.blit(raposaimg, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
         else:
             tela.blit(raposa2img, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
+
         
         
         #Eventos do jogo
