@@ -43,12 +43,7 @@ class Raposa():
     def __init__(self,posicao):
         self.posicaox = posicao[0]
         self.posicaoy = posicao[1]
-<<<<<<< HEAD
         self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128,128))
-=======
-        self.vida = 3
-        self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128, 128))
->>>>>>> 9a7374659d3c7c56e7016355887ba876a7f935a2
     def sobe_raposa(self):
         self.posicaoy -= 128
         self.retangulo.top = self.posicaoy     
