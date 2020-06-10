@@ -30,6 +30,7 @@ tela = pygame.display.set_mode((1200, 644))
 
 #Imagens das telas
 telainicial1 = pygame.image.load(os.path.join("Imagens", "Tela_inicial_final.png"))
+telafinal = pygame.image.load(os.path.join("Imagens", "Tela_final1.png"))
 
 
 
@@ -238,162 +239,186 @@ obj5 = Rua5(random.choice(velocidade))
 a5 = obj5.carro  
 obj6 = Rua6(random.choice(velocidade))
 a6 = obj6.carro    
+telainicial = True
 
 """Game Loop"""
 #Loop para rodar o jogo
-telainicial = True
-while telainicial:
+Foxer = True
+while Foxer:
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT or (evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE): 
-            telainicial = False
+            Foxer = False
             sys.exit()
-        if evento.type == pygame.KEYDOWN:
-            if evento.key == pygame.K_RETURN or evento.key == pygame.K_KP_ENTER:
-                telainicial = False        
 
-    tela.fill(PRETO)
-    tela.blit(telainicial1, (0,0))
-    pygame.display.update() #atualizando a tela
-     
+    while telainicial:
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT or (evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE): 
+                telainicial = False
+                sys.exit()
+            if evento.type == pygame.KEYDOWN:
+                if evento.key == pygame.K_RETURN or evento.key == pygame.K_KP_ENTER:
+                    abacaxi_objeto = Frutas(random.choice(lista_abacaxi))
+                    telainicial = False        
+        tela.fill(PRETO)
+        tela.blit(telainicial1, (0,0))
+        pygame.display.update() #atualizando a tela
 
-jogo = True
-while jogo:
-    deltat = relogio.tick(30)
-    tela.fill(PRETO)
-    tela.blit(cenario1, (0,0))
-    textsurface = myfont.render(str(score), False, PRETO)
-    tela.blit(textsurface,(70,60))
-
-    if j == True:
-        tela.blit(raposaimg, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
-        tela.blit(raposa3img, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
-        tela.blit(raposa4img, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
-
-    else:
-        tela.blit(raposa2img, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
     
-    #Eventos do jogo
-    for evento in pygame.event.get():
-        if evento.type == pygame.QUIT or (evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE): 
-            jogo = False
-            sys.exit()
-        if evento.type == pygame.KEYDOWN:
-            if evento.key == pygame.K_UP:
-                raposa_objeto.sobe_raposa()
-                if raposa_objeto.posicaox == 48 and raposa_objeto.posicaoy == 2:
-                    raposa_objeto.desce_raposa()
-                else:
-                    pass
-            if evento.key == pygame.K_DOWN:
-                raposa_objeto.desce_raposa()                
-            if evento.key == pygame.K_RIGHT:
-                raposa_objeto.direita()
-                j = False
-            if evento.key == pygame.K_LEFT:
-                raposa_objeto.esquerda()
-                if raposa_objeto.posicaox == 48 and raposa_objeto.posicaoy == 2:
+    jogo = True
+    while jogo:
+        deltat = relogio.tick(30)
+        tela.fill(PRETO)
+        tela.blit(cenario1, (0,0))
+        textsurface = myfont.render(str(score), False, PRETO)
+        tela.blit(textsurface,(70,60))
+
+        if j == True:
+            tela.blit(raposaimg, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
+            tela.blit(raposa3img, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
+            tela.blit(raposa4img, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
+
+        else:
+            tela.blit(raposa2img, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
+        
+        #Eventos do jogo
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT or (evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE): 
+                jogo = False
+                sys.exit()
+            if evento.type == pygame.KEYDOWN:
+                if evento.key == pygame.K_UP:
+                    raposa_objeto.sobe_raposa()
+                    if raposa_objeto.posicaox == 48 and raposa_objeto.posicaoy == 2:
+                        raposa_objeto.desce_raposa()
+                    else:
+                        pass
+                if evento.key == pygame.K_DOWN:
+                    raposa_objeto.desce_raposa()                
+                if evento.key == pygame.K_RIGHT:
                     raposa_objeto.direita()
-                else:
-                    pass                
-                j = True
-    
-    if colisao([raposa_objeto.posicaox,raposa_objeto.posicaoy], [abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy]) == True:
-        score += 1
-        if score%2 == 0 and score != 0 and velocidade[-1] < 30:
-                velocidade.append(v)
-                v += 1
-        o = random.choice(lista_abacaxi)
-        abacaxi_objeto.posicaox = o[0]
-        abacaxi_objeto.posicaoy = o[1]
+                    j = False
+                if evento.key == pygame.K_LEFT:
+                    raposa_objeto.esquerda()
+                    if raposa_objeto.posicaox == 48 and raposa_objeto.posicaoy == 2:
+                        raposa_objeto.direita()
+                    else:
+                        pass                
+                    j = True
+        
+        if colisao([raposa_objeto.posicaox,raposa_objeto.posicaoy], [abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy]) == True:
+            score += 1
+            if score%2 == 0 and score != 0 and velocidade[-1] < 30:
+                    velocidade.append(v)
+                    v += 1
+            o = random.choice(lista_abacaxi)
+            abacaxi_objeto.posicaox = o[0]
+            abacaxi_objeto.posicaoy = o[1]
 
-    
-    if a1.posicaoy < -129:        
-        a1.posicaoy = 838 
-        obj1 = Rua1(random.choice(velocidade))
-        a1 = obj1.carro
-    else:
-        a1.movimentacao()
+        
+        if a1.posicaoy < -129:        
+            a1.posicaoy = 838 
+            obj1 = Rua1(random.choice(velocidade))
+            a1 = obj1.carro
+        else:
+            a1.movimentacao()
 
-    if a2.posicaoy > 829:
-        a2.posicaoy = -138 
-        obj2 = Rua2(random.choice(velocidade))
-        a2 = obj2.carro
-    else:
-        a2.movimentacao()
+        if a2.posicaoy > 829:
+            a2.posicaoy = -138 
+            obj2 = Rua2(random.choice(velocidade))
+            a2 = obj2.carro
+        else:
+            a2.movimentacao()
 
-    if a3.posicaoy < -129:
-        a3.posicaoy = 838 
-        obj3 = Rua3(random.choice(velocidade))
-        a3 = obj3.carro
-    else:
-        a3.movimentacao()
+        if a3.posicaoy < -129:
+            a3.posicaoy = 838 
+            obj3 = Rua3(random.choice(velocidade))
+            a3 = obj3.carro
+        else:
+            a3.movimentacao()
 
-    if a4.posicaoy > 829:
-        a4.posicaoy = -138 
-        obj4 = Rua4(random.choice(velocidade))
-        a4 = obj4.carro
-    else:
-        a4.movimentacao()
+        if a4.posicaoy > 829:
+            a4.posicaoy = -138 
+            obj4 = Rua4(random.choice(velocidade))
+            a4 = obj4.carro
+        else:
+            a4.movimentacao()
 
-    if a5.posicaoy < -129:
-        a5.posicaoy = 838 
-        obj5 = Rua5(random.choice(velocidade))
-        a5 = obj5.carro
-    else:
-        a5.movimentacao()
+        if a5.posicaoy < -129:
+            a5.posicaoy = 838 
+            obj5 = Rua5(random.choice(velocidade))
+            a5 = obj5.carro
+        else:
+            a5.movimentacao()
 
-    if a6.posicaoy > 829:
-        a6.posicaoy = -138 
-        obj6 = Rua6(random.choice(velocidade))
-        a6 = obj6.carro
-    else:
-        a6.movimentacao()
+        if a6.posicaoy > 829:
+            a6.posicaoy = -138 
+            obj6 = Rua6(random.choice(velocidade))
+            a6 = obj6.carro
+        else:
+            a6.movimentacao()
 
-    #if colisao_carros([raposa_objeto.posicaox,raposa_objeto.posicaoy], [a6.posicaox,a6.posicaoy]) == True:
-    #    score +=1
-    
-
-
-    #print(a6.posicaox,a6.posicaoy, raposa_objeto.posicaox,raposa_objeto.posicaoy)
-    tela.blit(a1.imagem, (a1.posicaox, a1.posicaoy))
-    tela.blit(a2.imagem, (a2.posicaox, a2.posicaoy))
-    tela.blit(a3.imagem, (a3.posicaox, a3.posicaoy))
-    tela.blit(a4.imagem, (a4.posicaox, a4.posicaoy))
-    tela.blit(a5.imagem, (a5.posicaox, a5.posicaoy))
-    tela.blit(a6.imagem, (a6.posicaox, a6.posicaoy))
-    
-    if raposa_objeto.posicaox > 1072:
-        raposa_objeto.posicaox = 1072
-    elif raposa_objeto.posicaoy > 516:
-        raposa_objeto.posicaoy = 514
-    elif raposa_objeto.posicaox < 48:
-        raposa_objeto.posicaox = 48 
-    elif raposa_objeto.posicaoy < 0:
-        raposa_objeto.posicaoy = 2
-
-    if raposa_objeto.retangulo.colliderect(a1.retangulo):
-        print("Game Over")
-        jogo = False
-    elif raposa_objeto.retangulo.colliderect(a2.retangulo):
-        print("Game Over")
-        jogo = False
-    elif raposa_objeto.retangulo.colliderect(a3.retangulo):
-        print("Game Over")
-        jogo = False
-    elif raposa_objeto.retangulo.colliderect(a4.retangulo):
-        print("Game Over")
-        jogo = False
-    elif raposa_objeto.retangulo.colliderect(a5.retangulo):
-        print("Game Over")
-        jogo = False
-    elif raposa_objeto.retangulo.colliderect(a6.retangulo):
-        print("Game Over")
-        jogo = False
+        #if colisao_carros([raposa_objeto.posicaox,raposa_objeto.posicaoy], [a6.posicaox,a6.posicaoy]) == True:
+        #    score +=1
+        
 
 
-    tela.blit(abacaxiimg, (abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy))
+        #print(a6.posicaox,a6.posicaoy, raposa_objeto.posicaox,raposa_objeto.posicaoy)
+        tela.blit(a1.imagem, (a1.posicaox, a1.posicaoy))
+        tela.blit(a2.imagem, (a2.posicaox, a2.posicaoy))
+        tela.blit(a3.imagem, (a3.posicaox, a3.posicaoy))
+        tela.blit(a4.imagem, (a4.posicaox, a4.posicaoy))
+        tela.blit(a5.imagem, (a5.posicaox, a5.posicaoy))
+        tela.blit(a6.imagem, (a6.posicaox, a6.posicaoy))
+        
+        if raposa_objeto.posicaox > 1072:
+            raposa_objeto.posicaox = 1072
+        elif raposa_objeto.posicaoy > 516:
+            raposa_objeto.posicaoy = 514
+        elif raposa_objeto.posicaox < 48:
+            raposa_objeto.posicaox = 48 
+        elif raposa_objeto.posicaoy < 0:
+            raposa_objeto.posicaoy = 2
 
-    pygame.display.update() #atualizando a tela
-    
-    relogio.tick(60)
+        if raposa_objeto.retangulo.colliderect(a1.retangulo):
+            print("Game Over")
+            jogo = False
+        elif raposa_objeto.retangulo.colliderect(a2.retangulo):
+            print("Game Over")
+            jogo = False
+        elif raposa_objeto.retangulo.colliderect(a3.retangulo):
+            print("Game Over")
+            jogo = False
+        elif raposa_objeto.retangulo.colliderect(a4.retangulo):
+            print("Game Over")
+            jogo = False
+        elif raposa_objeto.retangulo.colliderect(a5.retangulo):
+            print("Game Over")
+            jogo = False
+        elif raposa_objeto.retangulo.colliderect(a6.retangulo):
+            print("Game Over")
+            jogo = False
+        tela.blit(abacaxiimg, (abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy))
+
+        pygame.display.update() #atualizando a tela
+        relogio.tick(60)
+
+    game_over = True
+    while game_over:
+        tela.blit(telainicial1, (0,0))
+        textsurface1 = myfont.render(str(score), False, PRETO)
+        tela.blit(textsurface1,(300,360))
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT or (evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE): 
+                game_over = False
+                sys.exit()
+            if evento.type == pygame.KEYDOWN:
+                if evento.key == pygame.K_RETURN or evento.key == pygame.K_KP_ENTER:
+                    abacaxi_objeto = Frutas(random.choice(lista_abacaxi)) 
+                    tela_inicial = False
+                    jogo = True  
+                    game_over = False 
+        tela.fill(PRETO)
+        tela.blit(telafinal,(0,0))          
+        pygame.display.update() #atualizando a tela
+
 
