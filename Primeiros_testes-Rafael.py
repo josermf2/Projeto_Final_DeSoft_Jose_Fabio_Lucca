@@ -7,6 +7,7 @@ from pygame import mixer
 import random
 import math
 import numpy as np
+# x=90 y=56
 
 pygame.init() #Iniciando Pygame
 
@@ -44,6 +45,7 @@ class Raposa():
         self.posicaox = posicao[0]
         self.posicaoy = posicao[1]
         self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128,128))
+        self.vida = 3
     def sobe_raposa(self):
         self.posicaoy -= 128
         self.retangulo.top = self.posicaoy     
@@ -239,6 +241,11 @@ obj6 = Rua6(random.choice(velocidade))
 a6 = obj6.carro    
 telainicial = True
 
+def vida():
+    if vida == 3:
+        tela.blit(vidaimg, (1085, 15))
+    tela.blit(vidaimg, (1127, 15))
+    tela.blit(vidaimg, (1169, 15))
 
 #Sons
 def abacaxi_sound():
@@ -251,8 +258,7 @@ def musicafundo():
     mixer.init()
     mixer.music.load(os.path.join('Musicas e Efeitos Sonoros','musica_de_fundo.mp3'))
     mixer.music.set_volume(0.2)
-    mixer.music.play(-1)
-
+    mixer.music.play()
 
 def colisao_sound():
     mixer.init()
@@ -287,7 +293,6 @@ while Foxer:
                 sys.exit()
             if evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_RETURN or evento.key == pygame.K_KP_ENTER:
-
                     enter_sound()
                     abacaxi_objeto = Frutas(random.choice(lista_abacaxi)) 
                     score = 0
@@ -297,7 +302,6 @@ while Foxer:
                     raposa_objeto.posicaoy = 258
                     raposa_objeto.retangulo.left = 1072
                     raposa_objeto.retangulo.top = 258
-                    vida = 3
                     Timer = True
                     telainicial = False
         tela.fill(PRETO)
@@ -343,26 +347,6 @@ while Foxer:
                         pass                
                     j = True
 
-        if vida == 3:
-            tela.blit(vidaimg, (1085, 15))
-            tela.blit(vidaimg, (1120, 15))
-            tela.blit(vidaimg, (1155, 15))
-        elif vida == 2:
-            raposa_objeto.posicaox = 1072
-            raposa_objeto.posicaoy = 258
-            raposa_objeto.retangulo.left = 1072
-            raposa_objeto.retangulo.top = 258
-            vida += 0.10
-        elif vida == 2.1:
-            tela.blit(vidaimg, (1120, 15))
-            tela.blit(vidaimg, (1155, 15))
-        elif vida == 1.1:
-            raposa_objeto.posicaox = 1072
-            raposa_objeto.posicaoy = 258
-            raposa_objeto.retangulo.left = 1072
-            vida += 0.10            
-        elif vida >= 1.2 and vida <=1.3:
-            tela.blit(vidaimg, (1155, 15))
 
         if colisao([raposa_objeto.posicaox,raposa_objeto.posicaoy], [abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy]) == True:
             abacaxi_sound()
@@ -435,34 +419,23 @@ while Foxer:
 
         if raposa_objeto.retangulo.colliderect(a1.retangulo):
             colisao_sound()
-            vida -= 1
-            if vida <= 0.2:
-                jogo = False 
+            jogo = False
         elif raposa_objeto.retangulo.colliderect(a2.retangulo):
             colisao_sound()
-            vida -= 1
-            if vida <= 0.2:
-                jogo = False 
+            jogo = False
         elif raposa_objeto.retangulo.colliderect(a3.retangulo):
             colisao_sound()
-            vida -= 1
-            if vida <= 0.2:
-                jogo = False 
+            jogo = False
         elif raposa_objeto.retangulo.colliderect(a4.retangulo):
             colisao_sound()
-            vida -= 1
-            if vida <= 0.2:
-                jogo = False 
+            jogo = False
         elif raposa_objeto.retangulo.colliderect(a5.retangulo):
             colisao_sound()
-            vida -= 1
-            if vida <= 0.2:
-                jogo = False 
+            jogo = False
         elif raposa_objeto.retangulo.colliderect(a6.retangulo):
             colisao_sound()
-            vida -= 1
-            if vida <= 0.2:
-                jogo = False 
+            jogo = False
+        
 
         tela.blit(abacaxiimg, (abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy))
 
