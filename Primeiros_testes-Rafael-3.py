@@ -43,12 +43,7 @@ class Raposa():
     def __init__(self,posicao):
         self.posicaox = posicao[0]
         self.posicaoy = posicao[1]
-<<<<<<< HEAD
         self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128,128))
-=======
-        self.vida = 3
-        self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128, 128))
->>>>>>> 9a7374659d3c7c56e7016355887ba876a7f935a2
     def sobe_raposa(self):
         self.posicaoy -= 128
         self.retangulo.top = self.posicaoy     
@@ -252,13 +247,19 @@ def abacaxi_sound():
     mixer.music.set_volume(0.2)
     mixer.music.play()
 
-def musicafundo():
-    mixer.init()
-    mixer.music.load(os.path.join('Musicas e Efeitos Sonoros','musica_de_fundo.mp3'))
-    mixer.music.set_volume(0.2)
-    mixer.music.play(-1)
-
-
+class Musicafundo:
+    def __init__(self):
+        self.musica = os.path.join('Musicas e Efeitos Sonoros','musica_de_fundo.mp3')
+    
+    def tocar():
+        mixer.init()
+        mixer.music.load()
+        mixer.music.set_volume(0.2)
+        mixer.music.play(-1)
+    
+    def pausar():
+    
+        
 def colisao_sound():
     mixer.init()
     mixer.music.load(os.path.join('Musicas e Efeitos Sonoros','colisao.mp3'))
@@ -319,11 +320,8 @@ while Foxer:
         tela.blit(textsurface,(70,60))
         if j == True and raposa_objeto.posicaox != 48:
             tela.blit(raposaimg, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
-        elif j == False and raposa_objeto.posicaox == 1072:
-            tela.blit(raposaimg, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
         else:
             tela.blit(raposa2img, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
-
         
         
         #Eventos do jogo
