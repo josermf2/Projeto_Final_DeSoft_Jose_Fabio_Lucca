@@ -219,7 +219,7 @@ del lista_abacaxi[12]
 del lista_abacaxi[20]
 del lista_abacaxi[25]
 del lista_abacaxi[33]
-
+del lista_abacaxi[33]
 
 raposa_objeto = Raposa([1072,258])
 abacaxi_objeto = Frutas(random.choice(lista_abacaxi))
@@ -243,28 +243,25 @@ telainicial = True
 #Sons
 def abacaxi_sound():
     mixer.init()
-    mixer.music.load(os.path.join('Musicas e Efeitos Sonoros','abacaxi.mp3'))
-    mixer.music.set_volume(0.2)
-    mixer.music.play()
+    abacaxi = mixer.Sound(os.path.join('Musicas e Efeitos Sonoros','abacaxi.ogg'))
+    abacaxi.play()
 
-def musicafundo():
-    mixer.init()
-    mixer.music.load(os.path.join('Musicas e Efeitos Sonoros','musica_de_fundo.mp3'))
-    mixer.music.set_volume(0.2)
-    mixer.music.play(-1)
+
+mixer.init()
+mixer.music.load(os.path.join('Musicas e Efeitos Sonoros','musica_de_fundo.mp3'))
+mixer.music.set_volume(0.2)
+mixer.music.play(-1)
 
 
 def colisao_sound():
     mixer.init()
-    mixer.music.load(os.path.join('Musicas e Efeitos Sonoros','colisao.mp3'))
-    mixer.music.set_volume(0.2)
-    mixer.music.play()
+    colisao = mixer.Sound(os.path.join('Musicas e Efeitos Sonoros','colisao.ogg'))
+    colisao.play()
 
 def enter_sound():
     mixer.init()
-    mixer.music.load(os.path.join('Musicas e Efeitos Sonoros','enter.mp3'))
-    mixer.music.set_volume(0.2)
-    mixer.music.play()
+    enter = mixer.Sound(os.path.join('Musicas e Efeitos Sonoros','enter.ogg'))
+    enter.play()
 
 
 
@@ -312,6 +309,9 @@ while Foxer:
         tela.blit(cenario1, (0,0))
         textsurface = myfont.render(str(score), False, PRETO)
         tela.blit(textsurface,(70,60))
+        tela.blit(abacaxiimg, (abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy))
+
+
         if j == True and raposa_objeto.posicaox != 48:
             tela.blit(raposaimg, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
         elif j == False and raposa_objeto.posicaox == 1072:
@@ -467,7 +467,6 @@ while Foxer:
             if vida <= 0.2:
                 jogo = False 
 
-        tela.blit(abacaxiimg, (abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy))
 
         pygame.display.update() #atualizando a tela
 
@@ -489,5 +488,3 @@ while Foxer:
         textsurface = myfont.render(str(score), False, PRETO)
         tela.blit(textsurface, (470,348))  
         pygame.display.update() #atualizando a tela
-
-
