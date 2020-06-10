@@ -6,7 +6,7 @@ import pygame
 import random
 import math
 import numpy as np
-
+from pygame import mixer
 # x=90 y=56
 
 pygame.init() #Iniciando Pygame
@@ -314,7 +314,8 @@ while Foxer:
                     j = True
         
         if colisao([raposa_objeto.posicaox,raposa_objeto.posicaoy], [abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy]) == True:
-            abacax1_sound = mixer.Sound
+            abacaxi_sound = mixer.Sound('abacaxi.mp3')
+            abacaxi_sound.play()
             score += 1
             if score%2 == 0 and score != 0 and velocidade[-1] < 30:
                     velocidade.append(v)
