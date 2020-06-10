@@ -202,11 +202,11 @@ raposa4img = pygame.image.load(os.path.join('Imagens','Raposa_3.png')).convert_a
 
 relogio = pygame.time.Clock()
 
-velocidade = [7,8,9,10]
+velocidade = [2,3]
 lista_abacaxix = np.arange(80,1216,128)
 lista_abacaxiy = np.arange(34,650,128)
 lista_abacaxi = []
-v = 11
+v = 4
 
 for i in lista_abacaxix:
     for u in lista_abacaxiy:
@@ -243,9 +243,10 @@ telainicial = True
 def abacaxi_sound():
     mixer.init()
     mixer.music.load('abacaxi.mp3')
-    mixer.music.set_volume(0.01)
+    mixer.music.set_volume(0.3)
     mixer.music.play()
 
+Timer = True
 
 """Game Loop"""
 #Loop para rodar o jogo
@@ -264,15 +265,16 @@ while Foxer:
                 sys.exit()
             if evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_RETURN or evento.key == pygame.K_KP_ENTER:
-                    abacaxi_objeto = Frutas(random.choice(lista_abacaxi))
-                    telainicial = False 
+                    abacaxi_objeto = Frutas(random.choice(lista_abacaxi)) 
                     score = 0
-                    v = 11
-                    velocidade = [7,8,9,10]
+                    v = 5
+                    velocidade = [3,4]
                     raposa_objeto.posicaox = 1072
                     raposa_objeto.posicaoy = 258
                     raposa_objeto.retangulo.left = 1072
                     raposa_objeto.retangulo.top = 258
+                    Timer = True
+                    telainicial = False
         tela.fill(PRETO)
         tela.blit(telainicial1, (0,0))
         pygame.display.update() #atualizando a tela
@@ -280,19 +282,17 @@ while Foxer:
     
     jogo = True
     while jogo:
-        deltat = relogio.tick(30)
+        deltat = relogio.tick(60)
         tela.fill(PRETO)
         tela.blit(cenario1, (0,0))
         textsurface = myfont.render(str(score), False, PRETO)
         tela.blit(textsurface,(70,60))
 
-        if j == True:
+        if j == True and raposa_objeto.posicaox != 48:
             tela.blit(raposaimg, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
-            tela.blit(raposa3img, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
-            tela.blit(raposa4img, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
-
         else:
             tela.blit(raposa2img, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
+        
         
         #Eventos do jogo
         for evento in pygame.event.get():
@@ -310,6 +310,7 @@ while Foxer:
                     raposa_objeto.desce_raposa()                
                 if evento.key == pygame.K_RIGHT:
                     raposa_objeto.direita()
+                    print(raposa_objeto.posicaox)
                     j = False
                 if evento.key == pygame.K_LEFT:
                     raposa_objeto.esquerda()
@@ -318,13 +319,14 @@ while Foxer:
                     else:
                         pass                
                     j = True
-        
+
+
         if colisao([raposa_objeto.posicaox,raposa_objeto.posicaoy], [abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy]) == True:
             abacaxi_sound()
             score += 1
-            if score%2 == 0 and score != 0 and velocidade[-1] < 30:
+            if score%2 == 0 and score != 0 and velocidade[-1] < 12:
                     velocidade.append(v)
-                    v += 1
+                    v += 0.1
             o = random.choice(lista_abacaxi)
             abacaxi_objeto.posicaox = o[0]
             abacaxi_objeto.posicaoy = o[1]
@@ -409,7 +411,7 @@ while Foxer:
         tela.blit(abacaxiimg, (abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy))
 
         pygame.display.update() #atualizando a tela
-        relogio.tick(60)
+
 
     game_over = True
     while game_over:
@@ -425,7 +427,7 @@ while Foxer:
         tela.fill(PRETO)
         tela.blit(telafinal,(0,0))        
         textsurface = myfont.render(str(score), False, PRETO)
-        tela.blit(textsurface, (474,348))  
+        tela.blit(textsurface, (470,348))  
         pygame.display.update() #atualizando a tela
 
 
