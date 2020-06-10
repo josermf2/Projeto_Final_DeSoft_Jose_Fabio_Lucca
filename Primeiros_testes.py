@@ -261,6 +261,8 @@ while Foxer:
                     abacaxi_objeto = Frutas(random.choice(lista_abacaxi))
                     telainicial = False 
                     score = 0
+                    v = 11
+                    velocidade = [7,8,9,10]
                     raposa_objeto.posicaox = 1072
                     raposa_objeto.posicaoy = 258
                     raposa_objeto.retangulo.left = 1072
@@ -410,13 +412,14 @@ while Foxer:
                 sys.exit()
             elif evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_RETURN or evento.key == pygame.K_KP_ENTER:
-                    abacaxi_objeto = Frutas(random.choice(lista_abacaxi)) 
+                    abacaxi_objeto = Frutas(random.choice(lista_abacaxi))
                     game_over = False 
-
+        print(velocidade) 
+        
         tela.fill(PRETO)
         tela.blit(telafinal,(0,0))        
         textsurface = myfont.render(str(score), False, PRETO)
-        tela.blit(textsurface, (478,348))  
+        tela.blit(textsurface, (474,348))  
         pygame.display.update() #atualizando a tela
 
 
