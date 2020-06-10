@@ -240,6 +240,12 @@ a5 = obj5.carro
 obj6 = Rua6(random.choice(velocidade))
 a6 = obj6.carro    
 telainicial = True
+def abacaxi_sound():
+    mixer.init()
+    mixer.music.load('abacaxi.mp3')
+    mixer.music.set_volume(0.01)
+    mixer.music.play()
+
 
 """Game Loop"""
 #Loop para rodar o jogo
@@ -314,8 +320,7 @@ while Foxer:
                     j = True
         
         if colisao([raposa_objeto.posicaox,raposa_objeto.posicaoy], [abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy]) == True:
-            pygame.mixer.music.load('abacaxi.mp3')
-            pygame.mixer.music.play()
+            abacaxi_sound()
             score += 1
             if score%2 == 0 and score != 0 and velocidade[-1] < 30:
                     velocidade.append(v)
