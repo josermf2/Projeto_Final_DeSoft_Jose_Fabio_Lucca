@@ -416,7 +416,7 @@ while Foxer:
         tela.fill(PRETO)
         tela.blit(telafinal,(0,0))        
         textsurface = myfont.render(str(score), False, PRETO)
-        tela.blit(textsurface, (480,350))  
+        tela.blit(textsurface, (478,348))  
         pygame.display.update() #atualizando a tela
 
 
