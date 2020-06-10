@@ -29,7 +29,7 @@ pygame.display.set_caption("Foxer")
 tela = pygame.display.set_mode((1200, 644))
 
 #Imagens das telas
-telainicial1 = pygame.image.load(os.path.join("Imagens", "Fundo_tela_inicial.png"))
+telainicial1 = pygame.image.load(os.path.join("Imagens", "Tela_inicial_final.png"))
 
 
 
