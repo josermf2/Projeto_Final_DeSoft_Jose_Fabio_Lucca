@@ -250,15 +250,21 @@ while Foxer:
             Foxer = False
             sys.exit()
 
+    telainicial = True
     while telainicial:
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT or (evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE): 
-                telainicial = False
+                Foxer = False
                 sys.exit()
             if evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_RETURN or evento.key == pygame.K_KP_ENTER:
                     abacaxi_objeto = Frutas(random.choice(lista_abacaxi))
-                    telainicial = False        
+                    telainicial = False 
+                    score = 0
+                    raposa_objeto.posicaox = 1072
+                    raposa_objeto.posicaoy = 258
+                    raposa_objeto.retangulo.left = 1072
+                    raposa_objeto.retangulo.top = 258
         tela.fill(PRETO)
         tela.blit(telainicial1, (0,0))
         pygame.display.update() #atualizando a tela
@@ -283,7 +289,7 @@ while Foxer:
         #Eventos do jogo
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT or (evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE): 
-                jogo = False
+                Foxer = False
                 sys.exit()
             if evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_UP:
@@ -357,12 +363,6 @@ while Foxer:
         else:
             a6.movimentacao()
 
-        #if colisao_carros([raposa_objeto.posicaox,raposa_objeto.posicaoy], [a6.posicaox,a6.posicaoy]) == True:
-        #    score +=1
-        
-
-
-        #print(a6.posicaox,a6.posicaoy, raposa_objeto.posicaox,raposa_objeto.posicaoy)
         tela.blit(a1.imagem, (a1.posicaox, a1.posicaoy))
         tela.blit(a2.imagem, (a2.posicaox, a2.posicaoy))
         tela.blit(a3.imagem, (a3.posicaox, a3.posicaoy))
@@ -404,21 +404,19 @@ while Foxer:
 
     game_over = True
     while game_over:
-        tela.blit(telainicial1, (0,0))
-        textsurface1 = myfont.render(str(score), False, PRETO)
-        tela.blit(textsurface1,(300,360))
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT or (evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE): 
-                game_over = False
+                Foxer = False
                 sys.exit()
-            if evento.type == pygame.KEYDOWN:
+            elif evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_RETURN or evento.key == pygame.K_KP_ENTER:
                     abacaxi_objeto = Frutas(random.choice(lista_abacaxi)) 
-                    tela_inicial = False
-                    jogo = True  
                     game_over = False 
+
         tela.fill(PRETO)
-        tela.blit(telafinal,(0,0))          
+        tela.blit(telafinal,(0,0))        
+        textsurface = myfont.render(str(score), False, PRETO)
+        tela.blit(textsurface, (480,350))  
         pygame.display.update() #atualizando a tela
 
 
