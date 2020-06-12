@@ -265,7 +265,6 @@ def enter_sound():
 
 
 
-Timer = True
 
 """Game Loop"""
 #Loop para rodar o jogo
