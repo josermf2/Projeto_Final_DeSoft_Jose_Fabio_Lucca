@@ -28,19 +28,34 @@ pygame.display.set_caption("Foxer")
 #Criando Tela
 tela = pygame.display.set_mode((1200, 644))
 
+#Criando o placar 
+score = 0
+
+#Importando a Fonte
+fonte = pygame.font.SysFont('SuperMario256', 90)
+#fonte = pygame.font.SysFont('Arial', 50)
+ 
+
+'''Carregando Imagens'''
 #Imagens das telas
 telainicial1 = pygame.image.load(os.path.join("Imagens", "Tela_inicial_final.png"))
 telafinal = pygame.image.load(os.path.join("Imagens", "Tela_final1.png"))
 
-
-
-#Criando telas
+#Imagem do cenário
 cenario1 = pygame.image.load(os.path.join("Imagens", "Foxercenariofinal.png")).convert()
-#cenario2 = pygame.image.load(os.path.join("Imagens", "Cenario_2.png")).convert()
+
+#Imagens da raposa 
+raposaimg = pygame.image.load(os.path.join('Imagens','Raposa_1.png')).convert_alpha()
+raposa2img = pygame.image.load(os.path.join('Imagens','Raposa_11.png')).convert_alpha()
+
+#Imagem do abacaxi
+abacaxiimg = pygame.image.load(os.path.join('Imagens','Abacaxi64.png')).convert_alpha()
+
+#Icone das vidas
+vidaimg = pygame.image.load(os.path.join('Imagens','vida.png')).convert_alpha()
 
 
 """Classes"""
-
 #Criando a classe da raposa
 class Raposa():
     def __init__(self,posicao):
@@ -65,33 +80,6 @@ class Frutas:
     def __init__(self,posicao):
         self.posicaox = posicao[0]
         self.posicaoy = posicao[1]
-
-#Criando a colisão do abacaxi
-def colisao(lista1,lista2):
-    distancia = math.sqrt((lista1[0]-lista2[0])**2 + (lista1[1]-lista2[1])**2)
-
-    if distancia <= 74:
-        return True
-    else:
-        return False
-
-#Criando o placar 
-score = 0
-
-#Criando o texto
-myfont = pygame.font.SysFont('SuperMario256',90)
-
-#Criando listas de automóveis
-automoveis_baixo_cima = ['car1', 'busao', 'racingcar', 'car2', 'caminhão']
-automoveis_cima_baixo = ['car1invertido', 'busaoinvertido', 'racingcarinvertido', 'car2invertido','caminhãoinvertido']
-
-#Criando posições iniciais de cada rua
-i1 = [944,838]
-i2 = [816,-128]
-i3 = [560,838]
-i4 = [432, -128]
-i5 = [304, 838]
-i6 = [176, -128]
 
 #Criando a classe de Automóveis
 class Automoveis:
@@ -207,17 +195,50 @@ class Rua6:
         self.carro = Automoveis(6,velocidade)
         self.carro.movimentacao()   
 
+'''Funções'''
+#Criando a colisão do abacaxi
+def colisao(lista1,lista2):
+    distancia = math.sqrt((lista1[0]-lista2[0])**2 + (lista1[1]-lista2[1])**2)
 
-#Carregando as imagens 
-raposaimg = pygame.image.load(os.path.join('Imagens','Raposa_1.png')).convert_alpha()
-abacaxiimg = pygame.image.load(os.path.join('Imagens','Abacaxi64.png')).convert_alpha()
-raposa2img = pygame.image.load(os.path.join('Imagens','Raposa_11.png')).convert_alpha()
-raposa3img = pygame.image.load(os.path.join('Imagens','Raposa_2.png')).convert_alpha()
-raposa4img = pygame.image.load(os.path.join('Imagens','Raposa_3.png')).convert_alpha()
-vidaimg = pygame.image.load(os.path.join('Imagens','vida.png')).convert_alpha()
+    if distancia <= 74:
+        return True
+    else:
+        return False
 
-#Criando o relógio do pygame
-relogio = pygame.time.Clock()
+#Criando música de fundo
+mixer.init()
+mixer.music.load(os.path.join('Musicas e Efeitos Sonoros','musica_de_fundo.mp3'))
+mixer.music.set_volume(0.2)
+mixer.music.play(-1)
+
+#Criando sons
+def abacaxi_sound():
+    mixer.init()
+    abacaxi = mixer.Sound(os.path.join('Musicas e Efeitos Sonoros','abacaxi.ogg'))
+    abacaxi.play()
+
+def colisao_sound():
+    mixer.init()
+    colisao = mixer.Sound(os.path.join('Musicas e Efeitos Sonoros','colisao.ogg'))
+    colisao.play()
+
+def enter_sound():
+    mixer.init()
+    enter = mixer.Sound(os.path.join('Musicas e Efeitos Sonoros','enter.ogg'))
+    enter.play()
+
+'''Listas'''
+#Criando listas de automóveis
+automoveis_baixo_cima = ['car1', 'busao', 'racingcar', 'car2', 'caminhão']
+automoveis_cima_baixo = ['car1invertido', 'busaoinvertido', 'racingcarinvertido', 'car2invertido','caminhãoinvertido']
+
+#Criando posições iniciais de cada rua
+i1 = [944,838]
+i2 = [816,-128]
+i3 = [560,838]
+i4 = [432, -128]
+i5 = [304, 838]
+i6 = [176, -128]
 
 #Criando a lista de velocidades 
 velocidade = [2,3]
@@ -242,11 +263,15 @@ del lista_abacaxi[25]
 del lista_abacaxi[33]
 del lista_abacaxi[33]
 
-#Criando objetos 
-raposa_objeto = Raposa([1072,258])
-abacaxi_objeto = Frutas(random.choice(lista_abacaxi))
-j = True
 
+'''Criando objetos'''
+#Objeto da Raposa 
+raposa_objeto = Raposa([1072,258])
+
+#Objeto Abacaxi
+abacaxi_objeto = Frutas(random.choice(lista_abacaxi))
+
+#Objeotos dos carros
 obj1 = Rua1(random.choice(velocidade))
 a1 = obj1.carro
 obj2 = Rua2(random.choice(velocidade))
@@ -259,34 +284,12 @@ obj5 = Rua5(random.choice(velocidade))
 a5 = obj5.carro  
 obj6 = Rua6(random.choice(velocidade))
 a6 = obj6.carro    
-telainicial = True
 
 
-# Criando música de fundo
-mixer.init()
-mixer.music.load(os.path.join('Musicas e Efeitos Sonoros','musica_de_fundo.mp3'))
-mixer.music.set_volume(0.2)
-mixer.music.play(-1)
-
-#Criando sons
-def abacaxi_sound():
-    mixer.init()
-    abacaxi = mixer.Sound(os.path.join('Musicas e Efeitos Sonoros','abacaxi.ogg'))
-    abacaxi.play()
-
-def colisao_sound():
-    mixer.init()
-    colisao = mixer.Sound(os.path.join('Musicas e Efeitos Sonoros','colisao.ogg'))
-    colisao.play()
-
-def enter_sound():
-    mixer.init()
-    enter = mixer.Sound(os.path.join('Musicas e Efeitos Sonoros','enter.ogg'))
-    enter.play()
+#Criando o relógio do pygame
+relogio = pygame.time.Clock()
 
 
-
-#Criando loop do jogo
 """Game Loop"""
 #Loop geral
 Foxer = True
@@ -316,6 +319,7 @@ while Foxer:
                     raposa_objeto.retangulo.left = 1072
                     raposa_objeto.retangulo.top = 258
                     vida = 3
+                    j = True
                     Timer = True
                     telainicial = False
         tela.fill(PRETO)
@@ -328,7 +332,7 @@ while Foxer:
         deltat = relogio.tick(60) #definindo a taxa de FPS do jogo
         tela.fill(PRETO)
         tela.blit(cenario1, (0,0)) #mostrando o cenário do jogo
-        textsurface = myfont.render(str(score), False, PRETO)
+        textsurface = fonte.render(str(score), False, PRETO)
         tela.blit(textsurface,(70,60)) #mostrando o score do jogador 
         tela.blit(abacaxiimg, (abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy)) #mostrando o abacaxi
 
@@ -340,8 +344,6 @@ while Foxer:
         else:
             tela.blit(raposa2img, (raposa_objeto.posicaox,raposa_objeto.posicaoy)) #invertendo a imagem da raposa
 
-        
-        
         #Eventos do jogo
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT or (evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE): #evento de quit do jogo
@@ -366,6 +368,7 @@ while Foxer:
                     else:
                         pass                
                     j = True
+
         #Mostrando número de vidas
         if vida == 3: #3 vidas
             tela.blit(vidaimg, (1085, 15))
@@ -441,13 +444,13 @@ while Foxer:
         else:
             a6.movimentacao()
         
-        #mostrando os carros   
-        tela.blit(a1.imagem, (a1.posicaox, a1.posicaoy))
-        tela.blit(a2.imagem, (a2.posicaox, a2.posicaoy))
-        tela.blit(a3.imagem, (a3.posicaox, a3.posicaoy))
-        tela.blit(a4.imagem, (a4.posicaox, a4.posicaoy))
-        tela.blit(a5.imagem, (a5.posicaox, a5.posicaoy))
-        tela.blit(a6.imagem, (a6.posicaox, a6.posicaoy))
+        #mostrando os carros    
+        tela.blit(a1.imagem, (a1.posicaox, a1.posicaoy)) #rua 1
+        tela.blit(a2.imagem, (a2.posicaox, a2.posicaoy)) #rua 2
+        tela.blit(a3.imagem, (a3.posicaox, a3.posicaoy)) #rua 3
+        tela.blit(a4.imagem, (a4.posicaox, a4.posicaoy)) #rua 4
+        tela.blit(a5.imagem, (a5.posicaox, a5.posicaoy)) #rua 5
+        tela.blit(a6.imagem, (a6.posicaox, a6.posicaoy)) #rua 6
         
         #definindo os limites do cenário
         if raposa_objeto.posicaox > 1072:
@@ -509,6 +512,6 @@ while Foxer:
         
         tela.fill(PRETO)
         tela.blit(telafinal,(0,0))        
-        textsurface = myfont.render(str(score), False, PRETO)
+        textsurface = fonte.render(str(score), False, PRETO)
         tela.blit(textsurface, (470,348)) #Mostrando o score final do jogo
         pygame.display.update() #atualizando a tela
