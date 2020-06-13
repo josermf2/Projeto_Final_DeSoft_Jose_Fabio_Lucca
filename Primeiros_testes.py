@@ -8,7 +8,8 @@ import random
 import math
 import numpy as np
 
-pygame.init() #Iniciando Pygame
+#Iniciando Pygame
+pygame.init() 
 
 #Cores
 BRANCO = (255, 255, 255)
@@ -39,6 +40,8 @@ cenario1 = pygame.image.load(os.path.join("Imagens", "Foxercenariofinal.png")).c
 
 
 """Classes"""
+
+#Criando a classe da raposa
 class Raposa():
     def __init__(self,posicao):
         self.posicaox = posicao[0]
@@ -57,11 +60,13 @@ class Raposa():
         self.posicaox -= 128
         self.retangulo.left = self.posicaox 
 
+#Criando a classe do abacaxi
 class Frutas:
     def __init__(self,posicao):
         self.posicaox = posicao[0]
         self.posicaoy = posicao[1]
 
+#Criando a colisão do abacaxi
 def colisao(lista1,lista2):
     distancia = math.sqrt((lista1[0]-lista2[0])**2 + (lista1[1]-lista2[1])**2)
 
@@ -70,11 +75,17 @@ def colisao(lista1,lista2):
     else:
         return False
 
+#Criando o placar 
 score = 0
+
+#Criando o texto
 myfont = pygame.font.SysFont('SuperMario256',90)
 
+#Criando listas de automóveis
 automoveis_baixo_cima = ['car1', 'busao', 'racingcar', 'car2', 'caminhão']
 automoveis_cima_baixo = ['car1invertido', 'busaoinvertido', 'racingcarinvertido', 'car2invertido','caminhãoinvertido']
+
+#Criando posições iniciais de cada rua
 i1 = [944,838]
 i2 = [816,-128]
 i3 = [560,838]
@@ -82,6 +93,7 @@ i4 = [432, -128]
 i5 = [304, 838]
 i6 = [176, -128]
 
+#Criando a classe de Automóveis
 class Automoveis:
     def __init__(self, rua,velocidade):
         self.velocidade = velocidade
@@ -144,6 +156,7 @@ class Automoveis:
                 self.imagem = pygame.image.load(os.path.join("Imagens",'Caminhão2.png')).convert_alpha()
                 self.retangulo = pygame.Rect((self.posicaox, self.posicaoy), (128, 180))   
     
+    #Criando a função de movimento
     def movimentacao(self):
         if self.rua == 1 or self.rua == 3 or self.rua == 5: 
             self.posicaoy -= self.velocidade
@@ -152,37 +165,42 @@ class Automoveis:
             self.posicaoy += self.velocidade
             self.retangulo.top = self.posicaoy 
 
-
+#Criando a classe da rua 1
 class Rua1:
     def __init__(self,velocidade):
         self.velocidade = velocidade
         self.carro = Automoveis(1,velocidade)
         self.carro.movimentacao()
 
+#Criando a classe da rua 2
 class Rua2:
     def __init__(self,velocidade): 
         self.velocidade = velocidade
         self.carro = Automoveis(2,velocidade)
         self.carro.movimentacao()
 
+#Criando a classe da rua 3
 class Rua3:
     def __init__(self,velocidade): 
         self.velocidade = velocidade
         self.carro = Automoveis(3,velocidade)
         self.carro.movimentacao()
 
+#Criando a classe da rua 4
 class Rua4:
     def __init__(self,velocidade): 
         self.velocidade = velocidade
         self.carro = Automoveis(4,velocidade)
         self.carro.movimentacao() 
 
+#Criando a classe da rua 5
 class Rua5:
     def __init__(self,velocidade): 
         self.velocidade = velocidade
         self.carro = Automoveis(5,velocidade)
         self.carro.movimentacao()
 
+#Criando a classe da rua 6
 class Rua6:
     def __init__(self,velocidade): 
         self.velocidade = velocidade
@@ -190,7 +208,7 @@ class Rua6:
         self.carro.movimentacao()   
 
 
-
+#Carregando as imagens 
 raposaimg = pygame.image.load(os.path.join('Imagens','Raposa_1.png')).convert_alpha()
 abacaxiimg = pygame.image.load(os.path.join('Imagens','Abacaxi64.png')).convert_alpha()
 raposa2img = pygame.image.load(os.path.join('Imagens','Raposa_11.png')).convert_alpha()
@@ -198,10 +216,13 @@ raposa3img = pygame.image.load(os.path.join('Imagens','Raposa_2.png')).convert_a
 raposa4img = pygame.image.load(os.path.join('Imagens','Raposa_3.png')).convert_alpha()
 vidaimg = pygame.image.load(os.path.join('Imagens','vida.png')).convert_alpha()
 
-
+#Criando o relógio do pygame
 relogio = pygame.time.Clock()
 
+#Criando a lista de velocidades 
 velocidade = [2,3]
+
+#Criando a lista do abacaxi
 lista_abacaxix = np.arange(80,1216,128)
 lista_abacaxiy = np.arange(34,650,128)
 lista_abacaxi = []
@@ -211,7 +232,7 @@ for i in lista_abacaxix:
     for u in lista_abacaxiy:
         lista_abacaxi.append([i,u])
 
-
+#Deletando posições críticas do abacaxi
 del lista_abacaxi[0]
 del lista_abacaxi[4]
 del lista_abacaxi[12]
@@ -221,6 +242,7 @@ del lista_abacaxi[25]
 del lista_abacaxi[33]
 del lista_abacaxi[33]
 
+#Criando objetos 
 raposa_objeto = Raposa([1072,258])
 abacaxi_objeto = Frutas(random.choice(lista_abacaxi))
 j = True
@@ -240,18 +262,17 @@ a6 = obj6.carro
 telainicial = True
 
 
-#Sons
-def abacaxi_sound():
-    mixer.init()
-    abacaxi = mixer.Sound(os.path.join('Musicas e Efeitos Sonoros','abacaxi.ogg'))
-    abacaxi.play()
-
-
+# Criando música de fundo
 mixer.init()
 mixer.music.load(os.path.join('Musicas e Efeitos Sonoros','musica_de_fundo.mp3'))
 mixer.music.set_volume(0.2)
 mixer.music.play(-1)
 
+#Criando sons
+def abacaxi_sound():
+    mixer.init()
+    abacaxi = mixer.Sound(os.path.join('Musicas e Efeitos Sonoros','abacaxi.ogg'))
+    abacaxi.play()
 
 def colisao_sound():
     mixer.init()
@@ -265,26 +286,27 @@ def enter_sound():
 
 
 
-
+#Criando loop do jogo
 """Game Loop"""
-#Loop para rodar o jogo
+#Loop geral
 Foxer = True
 while Foxer:
     for evento in pygame.event.get():
-        if evento.type == pygame.QUIT or (evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE): 
+        if evento.type == pygame.QUIT or (evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE): #evento de quit do jogo
             Foxer = False
             sys.exit()
 
+    #Loop do menu
     telainicial = True
     while telainicial:
         for evento in pygame.event.get():
-            if evento.type == pygame.QUIT or (evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE): 
+            if evento.type == pygame.QUIT or (evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE): #evento de quit do jogo
                 Foxer = False
                 sys.exit()
             if evento.type == pygame.KEYDOWN:
-                if evento.key == pygame.K_RETURN or evento.key == pygame.K_KP_ENTER:
-
+                if evento.key == pygame.K_RETURN or evento.key == pygame.K_KP_ENTER: #evento de início do jogo
                     enter_sound()
+                    #Resetando parâmetros do jogo
                     abacaxi_objeto = Frutas(random.choice(lista_abacaxi)) 
                     score = 0
                     v = 5
@@ -297,128 +319,129 @@ while Foxer:
                     Timer = True
                     telainicial = False
         tela.fill(PRETO)
-        tela.blit(telainicial1, (0,0))
+        tela.blit(telainicial1, (0,0)) #mostrando tela inicial do jogo
         pygame.display.update() #atualizando a tela
 
-    
+    #Loop do jogo
     jogo = True
     while jogo:
-        deltat = relogio.tick(60)
+        deltat = relogio.tick(60) #definindo a taxa de FPS do jogo
         tela.fill(PRETO)
-        tela.blit(cenario1, (0,0))
+        tela.blit(cenario1, (0,0)) #mostrando o cenário do jogo
         textsurface = myfont.render(str(score), False, PRETO)
-        tela.blit(textsurface,(70,60))
-        tela.blit(abacaxiimg, (abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy))
+        tela.blit(textsurface,(70,60)) #mostrando o score do jogador 
+        tela.blit(abacaxiimg, (abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy)) #mostrando o abacaxi
 
-
+        #Mostrando a raposa 
         if j == True and raposa_objeto.posicaox != 48:
-            tela.blit(raposaimg, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
+            tela.blit(raposaimg, (raposa_objeto.posicaox,raposa_objeto.posicaoy)) 
         elif j == False and raposa_objeto.posicaox == 1072:
             tela.blit(raposaimg, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
         else:
-            tela.blit(raposa2img, (raposa_objeto.posicaox,raposa_objeto.posicaoy))
+            tela.blit(raposa2img, (raposa_objeto.posicaox,raposa_objeto.posicaoy)) #invertendo a imagem da raposa
 
         
         
         #Eventos do jogo
         for evento in pygame.event.get():
-            if evento.type == pygame.QUIT or (evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE): 
+            if evento.type == pygame.QUIT or (evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE): #evento de quit do jogo
                 Foxer = False
                 sys.exit()
-            if evento.type == pygame.KEYDOWN:
-                if evento.key == pygame.K_UP:
+            if evento.type == pygame.KEYDOWN: #reconhecendo comandos do jogador
+                if evento.key == pygame.K_UP: #andando para cima
                     raposa_objeto.sobe_raposa()
                     if raposa_objeto.posicaox == 48 and raposa_objeto.posicaoy == 2:
                         raposa_objeto.desce_raposa()
                     else:
                         pass
-                if evento.key == pygame.K_DOWN:
+                if evento.key == pygame.K_DOWN: #andando para baixo
                     raposa_objeto.desce_raposa()                
-                if evento.key == pygame.K_RIGHT:
+                if evento.key == pygame.K_RIGHT: #andando para a direita 
                     raposa_objeto.direita()
                     j = False
-                if evento.key == pygame.K_LEFT:
+                if evento.key == pygame.K_LEFT: #andando para a esquerda
                     raposa_objeto.esquerda()
                     if raposa_objeto.posicaox == 48 and raposa_objeto.posicaoy == 2:
                         raposa_objeto.direita()
                     else:
                         pass                
                     j = True
-
-        if vida == 3:
+        #Mostrando número de vidas
+        if vida == 3: #3 vidas
             tela.blit(vidaimg, (1085, 15))
             tela.blit(vidaimg, (1120, 15))
             tela.blit(vidaimg, (1155, 15))
-        elif vida == 2:
+        elif vida == 2: #2 vidas
             raposa_objeto.posicaox = 1072
             raposa_objeto.posicaoy = 258
             raposa_objeto.retangulo.left = 1072
             raposa_objeto.retangulo.top = 258
             vida += 0.10
-        elif vida == 2.1:
+        elif vida == 2.1: 
             tela.blit(vidaimg, (1120, 15))
             tela.blit(vidaimg, (1155, 15))
-        elif vida == 1.1:
+        elif vida == 1.1: #1 vida
             raposa_objeto.posicaox = 1072
             raposa_objeto.posicaoy = 258
             raposa_objeto.retangulo.left = 1072
             vida += 0.10            
-        elif vida >= 1.2 and vida <=1.3:
+        elif vida >= 1.2 and vida <=1.3: #0 vidas
             tela.blit(vidaimg, (1155, 15))
-
+        #detectando colisão da raposa com o abacaxi
         if colisao([raposa_objeto.posicaox,raposa_objeto.posicaoy], [abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy]) == True:
-            abacaxi_sound()
+            abacaxi_sound() #implementando o som da colisão com o abacaxi
             score += 1
-            if score%2 == 0 and score != 0 and velocidade[-1] < 12:
+            if score%2 == 0 and score != 0 and velocidade[-1] < 12: #adicionando novas velocidades à lista de velocidade
                     velocidade.append(v)
                     v += 0.1
-            o = random.choice(lista_abacaxi)
+            o = random.choice(lista_abacaxi) #randomizando o surgimento dos abacaxis
             abacaxi_objeto.posicaox = o[0]
             abacaxi_objeto.posicaoy = o[1]
 
-        
-        if a1.posicaoy < -129:        
+        #criando e movimentando os carros
+        if a1.posicaoy < -129: #rua 1  
             a1.posicaoy = 838 
             obj1 = Rua1(random.choice(velocidade))
             a1 = obj1.carro
         else:
             a1.movimentacao()
 
-        if a2.posicaoy > 829:
+        if a2.posicaoy > 829: #rua 2
             a2.posicaoy = -138 
             obj2 = Rua2(random.choice(velocidade))
             a2 = obj2.carro
         else:
             a2.movimentacao()
 
-        if a3.posicaoy < -129:
+        if a3.posicaoy < -129: #rua 3
             a3.posicaoy = 838 
             obj3 = Rua3(random.choice(velocidade))
             a3 = obj3.carro
         else:
             a3.movimentacao()
 
-        if a4.posicaoy > 829:
+        if a4.posicaoy > 829: #rua 4
             a4.posicaoy = -138 
             obj4 = Rua4(random.choice(velocidade))
             a4 = obj4.carro
         else:
             a4.movimentacao()
 
-        if a5.posicaoy < -129:
+        if a5.posicaoy < -129: #rua 5
             a5.posicaoy = 838 
             obj5 = Rua5(random.choice(velocidade))
             a5 = obj5.carro
         else:
             a5.movimentacao()
 
-        if a6.posicaoy > 829:
+        if a6.posicaoy > 829: #rua 6
             a6.posicaoy = -138 
             obj6 = Rua6(random.choice(velocidade))
             a6 = obj6.carro
         else:
             a6.movimentacao()
-            
+        
+        #mostrando os carros   
         tela.blit(a1.imagem, (a1.posicaox, a1.posicaoy))
         tela.blit(a2.imagem, (a2.posicaox, a2.posicaoy))
         tela.blit(a3.imagem, (a3.posicaox, a3.posicaoy))
@@ -426,6 +449,7 @@ while Foxer:
         tela.blit(a5.imagem, (a5.posicaox, a5.posicaoy))
         tela.blit(a6.imagem, (a6.posicaox, a6.posicaoy))
         
+        #definindo os limites do cenário
         if raposa_objeto.posicaox > 1072:
             raposa_objeto.posicaox = 1072
         elif raposa_objeto.posicaoy > 516:
@@ -435,55 +459,56 @@ while Foxer:
         elif raposa_objeto.posicaoy < 0:
             raposa_objeto.posicaoy = 2
 
+        #detectando colisão com os carros
         if raposa_objeto.retangulo.colliderect(a1.retangulo):
-            colisao_sound()
-            vida -= 1
+            colisao_sound() #implementando o som da colisão com os carros
+            vida -= 1 #perdendo vida
             if vida <= 0.2:
                 jogo = False 
         elif raposa_objeto.retangulo.colliderect(a2.retangulo):
-            colisao_sound()
-            vida -= 1
+            colisao_sound() #implementando o som da colisão com os carros
+            vida -= 1 #perdendo vida
             if vida <= 0.2:
                 jogo = False 
         elif raposa_objeto.retangulo.colliderect(a3.retangulo):
-            colisao_sound()
-            vida -= 1
+            colisao_sound() #implementando o som da colisão com os carros
+            vida -= 1 #perdendo vida
             if vida <= 0.2:
                 jogo = False 
         elif raposa_objeto.retangulo.colliderect(a4.retangulo):
-            colisao_sound()
-            vida -= 1
+            colisao_sound() #implementando o som da colisão com os carros
+            vida -= 1 #perdendo vida
             if vida <= 0.2:
                 jogo = False 
         elif raposa_objeto.retangulo.colliderect(a5.retangulo):
-            colisao_sound()
-            vida -= 1
+            colisao_sound() #implementando o som da colisão com os carros
+            vida -= 1 #perdendo vida
             if vida <= 0.2:
                 jogo = False 
         elif raposa_objeto.retangulo.colliderect(a6.retangulo):
-            colisao_sound()
-            vida -= 1
+            colisao_sound() #implementando o som da colisão com os carros
+            vida -= 1 #perdendo vida
             if vida <= 0.2:
                 jogo = False 
 
 
         pygame.display.update() #atualizando a tela
 
-
+    #Loop do game over
     game_over = True
     while game_over:
         for evento in pygame.event.get():
-            if evento.type == pygame.QUIT or (evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE): 
+            if evento.type == pygame.QUIT or (evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE): #evento de quit do jogo
                 Foxer = False
                 sys.exit()
             elif evento.type == pygame.KEYDOWN:
-                if evento.key == pygame.K_RETURN or evento.key == pygame.K_KP_ENTER:
-                    enter_sound()
+                if evento.key == pygame.K_RETURN or evento.key == pygame.K_KP_ENTER: #evento de restart do jogo
+                    enter_sound() #implementando o som do reinício do jogo
                     abacaxi_objeto = Frutas(random.choice(lista_abacaxi))
                     game_over = False 
         
         tela.fill(PRETO)
         tela.blit(telafinal,(0,0))        
         textsurface = myfont.render(str(score), False, PRETO)
-        tela.blit(textsurface, (470,348))  
+        tela.blit(textsurface, (470,348)) #Mostrando o score final do jogo
         pygame.display.update() #atualizando a tela
