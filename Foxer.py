@@ -32,8 +32,9 @@ tela = pygame.display.set_mode((1200, 644))
 score = 0
 
 #Importando a Fonte
+'''Caso a fonte SuperMario256 apresente algum problema, coloque a linha 36 como comentario (#) e tire o # da linha 37'''
 fonte = pygame.font.SysFont('SuperMario256', 90)
-#fonte = pygame.font.SysFont('Arial', 50)
+#fonte = pygame.font.SysFont('Arial', 50) 
  
 
 '''Carregando Imagens'''
