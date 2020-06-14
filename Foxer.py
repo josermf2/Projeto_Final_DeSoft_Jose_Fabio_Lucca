@@ -242,26 +242,34 @@ i6 = [176, -128]
 
 #Criando a lista de velocidades 
 velocidade = [2,3]
+v = 4
 
 #Criando a lista do abacaxi
 lista_abacaxix = np.arange(80,1216,128)
 lista_abacaxiy = np.arange(34,650,128)
-lista_abacaxi = []
-v = 4
+lista_abacaxi_inicial = []
 
 for i in lista_abacaxix:
     for u in lista_abacaxiy:
-        lista_abacaxi.append([i,u])
+        lista_abacaxi_inicial.append([i,u])
 
 #Deletando posições críticas do abacaxi
-del lista_abacaxi[0]
-del lista_abacaxi[4]
-del lista_abacaxi[12]
-del lista_abacaxi[12]
-del lista_abacaxi[20]
-del lista_abacaxi[25]
-del lista_abacaxi[33]
-del lista_abacaxi[33]
+lista_abacaxi = []
+abacaxi = True
+for i in range (len(lista_abacaxi_inicial)):
+    if lista_abacaxi_inicial[i][1] == 34:
+        if lista_abacaxi_inicial[i][0] == 80 or lista_abacaxi_inicial[i][0] == 208 or lista_abacaxi_inicial[i][0] == 464 or lista_abacaxi_inicial[i][0] == 848 or lista_abacaxi_inicial[i][0] == 1104:
+            pass
+        else:
+            lista_abacaxi.append(lista_abacaxi_inicial[i])
+    elif lista_abacaxi_inicial[i][1] == 546:
+        if lista_abacaxi_inicial[i][0] == 336 or lista_abacaxi_inicial[i][0] == 592 or lista_abacaxi_inicial[i][0] == 976:
+            pass
+        else:
+            lista_abacaxi.append(lista_abacaxi_inicial[i])
+    else:
+        lista_abacaxi.append(lista_abacaxi_inicial[i])
+
 
 
 '''Criando objetos'''
