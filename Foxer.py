@@ -40,10 +40,13 @@ fonte = pygame.font.SysFont('SuperMario256', 90)
 '''Carregando Imagens'''
 #Imagens das telas
 telainicial1 = pygame.image.load(os.path.join("Imagens", "Tela_inicial_final.png"))
+telacenario = pygame.image.load(os.path.join("Imagens", "Telacenario.png"))
 telafinal = pygame.image.load(os.path.join("Imagens", "Tela_final1.png"))
 
 #Imagem do cenário
 cenario1 = pygame.image.load(os.path.join("Imagens", "Foxercenariofinal.png")).convert()
+cenario2 = pygame.image.load(os.path.join("Imagens", "Foxercenariofinal2.png")).convert()
+cenario3 = pygame.image.load(os.path.join("Imagens", "Foxercenariofinal3.png")).convert()
 
 #Imagens da raposa 
 raposaimg = pygame.image.load(os.path.join('Imagens','Raposa_1.png')).convert_alpha()
@@ -298,6 +301,9 @@ a6 = obj6.carro
 #Criando o relógio do pygame
 relogio = pygame.time.Clock()
 
+cenario10 = False
+cenario20 = False
+cenario30 = False
 
 """Game Loop"""
 #Loop geral
@@ -328,6 +334,9 @@ while Foxer:
                     raposa_objeto.retangulo.left = 1072
                     raposa_objeto.retangulo.top = 258
                     vida = 3
+                    cenario10 = False
+                    cenario20 = False
+                    cenario30 = False
                     j = True
                     Timer = True
                     telainicial = False
