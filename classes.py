@@ -1,6 +1,6 @@
 import pygame
 import random
-import os
+import os 
 
 """Classes"""
 #Criando a classe da raposa
