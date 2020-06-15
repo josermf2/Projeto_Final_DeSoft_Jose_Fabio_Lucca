@@ -93,12 +93,16 @@ for i in range (len(lista_abacaxi_inicial)):
     else:
         lista_abacaxi.append(lista_abacaxi_inicial[i])
 
+
 '''Criando objetos'''
 #Objeto da Raposa 
 raposa_objeto = Raposa([1072,258])
 
 #Objeto Abacaxi
 abacaxi_objeto = Frutas(random.choice(lista_abacaxi))
+
+#Guardando posicao do abacaxi
+naopode = [1072, 258]       
 
 #Objeotos dos carros
 obj1 = Rua1(random.choice(velocidade))
@@ -155,6 +159,7 @@ while Foxer:
                     cenario10 = False
                     cenario20 = False
                     cenario30 = False
+                    naopode = [1072, 258]
                     j = True
                     Timer = True
                     telainicial = False
@@ -261,7 +266,8 @@ while Foxer:
             vida += 0.10            
         elif vida >= 1.2 and vida <=1.3: #0 vidas
             tela.blit(vidaimg, (1155, 15))
-        #detectando colisão da raposa com o abacaxi
+
+        #Detectando colisão da raposa com o abacaxi
         if colisao([raposa_objeto.posicaox,raposa_objeto.posicaoy], [abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy]) == True:
             abacaxi_sound() #implementando o som da colisão com o abacaxi
             score += 1
@@ -269,8 +275,15 @@ while Foxer:
                     velocidade.append(v)
                     v += 0.1
             o = random.choice(lista_abacaxi) #randomizando o surgimento dos abacaxis
-            abacaxi_objeto.posicaox = o[0]
-            abacaxi_objeto.posicaoy = o[1]
+            if o != naopode: #o nao pode ser igual ao ultimo valor de o 
+                abacaxi_objeto.posicaox = o[0]
+                abacaxi_objeto.posicaoy = o[1]
+            else:
+                while o == naopode: 
+                    o = random.choice(lista_abacaxi) #randomizando o surgimento dos abacaxis
+                    abacaxi_objeto.posicaox = o[0]
+                    abacaxi_objeto.posicaoy = o[1]
+            naopode = o
 
         #criando e movimentando os carros
         if a1.posicaoy < -129: #rua 1  
