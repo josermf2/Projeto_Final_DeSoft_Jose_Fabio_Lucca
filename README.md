@@ -37,5 +37,5 @@ No Foxer você é uma raposa e seu objetivo é coletar o máximo de abacaxis pos
 
 ## **Link do video da Gameplay do jogo:**
 
-<https://youtu.be/zasvmTADf9M>
+<https://youtu.be/x36W6urtH6g>
 
