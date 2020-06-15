@@ -56,7 +56,7 @@ raposa2img = pygame.image.load(os.path.join('Imagens','Raposa_11.png')).convert_
 abacaxiimg = pygame.image.load(os.path.join('Imagens','Abacaxi64.png')).convert_alpha()
 
 #Icone das vidas
-vidaimg = pygame.image.load(os.path.join('Imagens','vida.png')).convert_alpha()
+vidaimg1 = pygame.image.load(os.path.join('Imagens','vida.png')).convert_alpha()
 vidaimg2 = pygame.image.load(os.path.join('Imagens','vida2.png')).convert_alpha()
 vidaimg3 = pygame.image.load(os.path.join('Imagens','vida3.png')).convert_alpha()
 
@@ -315,6 +315,7 @@ while Foxer:
             Foxer = False
             sys.exit()
 
+
     #Loop do menu
     telainicial = True
     while telainicial:
@@ -345,20 +346,47 @@ while Foxer:
         tela.blit(telainicial1, (0,0)) #mostrando tela inicial do jogo
         pygame.display.update() #atualizando a tela
 
+    #Loop do menu de cenários
+    cenarios = True
+    while cenarios:
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT or (evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE): #evento de quit do jogo
+                Foxer = False
+                sys.exit()
+            if evento.type == pygame.KEYDOWN:
+                if evento.key == pygame.K_1 or evento.key == pygame.K_KP1: #evento para escolher cenário 1
+                    enter_sound()
+                    cenario10 = True
+                    cenarios = False
+                elif evento.key == pygame.K_2 or evento.key == pygame.K_KP2: #evento para escolher cenário 2
+                    enter_sound()
+                    cenario20 = True
+                    cenarios = False
+                elif evento.key == pygame.K_3 or evento.key == pygame.K_KP3: #evento para escolher cenário 3
+                    enter_sound()
+                    cenario30 = True
+                    cenarios = False    
+        tela.fill(PRETO)
+        tela.blit(telacenario, (0,0)) #mostrando tela inicial do jogo
+        pygame.display.update() #atualizando a tela
+
     #Loop do jogo
     jogo = True
     while jogo:
         deltat = relogio.tick(60) #definindo a taxa de FPS do jogo
         tela.fill(PRETO)
-        
-        #mostrando o cenário escolhido
+
+        #Mostrando o cenário escolhido
         if cenario10 == True:
             tela.blit(cenario1, (0,0))
+            vidaimg = vidaimg1
         elif cenario20 == True:
             tela.blit(cenario2, (0,0))
+            vidaimg = vidaimg2
         elif cenario30 == True: 
             tela.blit(cenario3, (0,0))
-        
+            vidaimg = vidaimg3
+           
         textsurface = fonte.render(str(score), False, PRETO)
         tela.blit(textsurface,(70,60)) #mostrando o score do jogador 
         tela.blit(abacaxiimg, (abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy)) #mostrando o abacaxi
@@ -521,7 +549,6 @@ while Foxer:
             if vida <= 0.2:
                 jogo = False 
 
-
         pygame.display.update() #atualizando a tela
 
     #Loop do game over
@@ -542,3 +569,4 @@ while Foxer:
         textsurface = fonte.render(str(score), False, PRETO)
         tela.blit(textsurface, (470,348)) #Mostrando o score final do jogo
         pygame.display.update() #atualizando a tela
+        
