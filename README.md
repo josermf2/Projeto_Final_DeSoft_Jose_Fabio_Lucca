@@ -7,8 +7,18 @@
 
 ## **Introdução:**
 
-No Foxer você é uma raposa e seu objetivo é coletar o máximo de abacaxis possíveis. Contudo, eles estão espalhados nas ruas de uma grande cidade. Dessa forma, você deve pegá-los evitando ser atropelada. 
-**ENTÃO CORRA, AS RUAS ESTÃO FICANDO MAIS MOVIMENTADAS!!**
+No Foxer você é uma raposa e seu objetivo é coletar o máximo de abacaxis possíveis. Contudo, eles estão espalhados nas ruas de uma grande cidade. Dessa forma, você deve pegá-los evitando ser atropelada. **ENTÃO CORRA, AS RUAS ESTÃO FICANDO MAIS MOVIMENTADAS!!**
+
+## **ATENÇÃO:**
+* Para jogar o Foxer é necessário que você tenha instalado em seu computador, além do python, as seguintes bibliotecas:
+  * Pygame
+  * Numpy 
+
+## **Como instalar o jogo**:
+* Clone a pasta do GitHub para um diretório em seu computador.
+* Abra a pasta clonada em uma IDE ou em um editor de código. Ex: VSCode
+* Execute o arquivo "Foxer .py"
+
 
 ## **Como jogar:**
 
