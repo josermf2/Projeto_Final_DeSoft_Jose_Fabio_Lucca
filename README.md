@@ -1,8 +1,8 @@
 # **Projeto Final de Design de Software - 1º Semestre de 2020 - Turma A**
 
 ## **Grupo**:
-  * ### Fabio Dotoli Ferreira Filho,
-  * ### José Rafael Martins Fernandes,
+  * ### Fabio Dotoli Ferreira Filho
+  * ### José Rafael Martins Fernandes
   * ### Lucca Barufatti Velini Sanches
 
 ## **Introdução:**
