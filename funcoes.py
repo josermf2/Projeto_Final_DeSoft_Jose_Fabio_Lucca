@@ -1,5 +1,7 @@
 import pygame 
 from pygame import mixer
+import os
+import math 
 
 '''Funções'''
 #Criando a colisão do abacaxi
