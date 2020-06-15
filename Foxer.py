@@ -57,7 +57,8 @@ abacaxiimg = pygame.image.load(os.path.join('Imagens','Abacaxi64.png')).convert_
 
 #Icone das vidas
 vidaimg = pygame.image.load(os.path.join('Imagens','vida.png')).convert_alpha()
-
+vidaimg2 = pygame.image.load(os.path.join('Imagens','vida2.png')).convert_alpha()
+vidaimg3 = pygame.image.load(os.path.join('Imagens','vida3.png')).convert_alpha()
 
 """Classes"""
 #Criando a classe da raposa
@@ -349,7 +350,15 @@ while Foxer:
     while jogo:
         deltat = relogio.tick(60) #definindo a taxa de FPS do jogo
         tela.fill(PRETO)
-        tela.blit(cenario1, (0,0)) #mostrando o cenário do jogo
+        
+        #mostrando o cenário escolhido
+        if cenario10 == True:
+            tela.blit(cenario1, (0,0))
+        elif cenario20 == True:
+            tela.blit(cenario2, (0,0))
+        elif cenario30 == True: 
+            tela.blit(cenario3, (0,0))
+        
         textsurface = fonte.render(str(score), False, PRETO)
         tela.blit(textsurface,(70,60)) #mostrando o score do jogador 
         tela.blit(abacaxiimg, (abacaxi_objeto.posicaox,abacaxi_objeto.posicaoy)) #mostrando o abacaxi
