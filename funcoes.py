@@ -4,11 +4,13 @@ import os
 import math 
 
 '''Funções'''
+#Calculando distancia
+def calculaDistancia(lista1,lista2):
+    return math.sqrt((lista1[0]-lista2[0])**2 + (lista1[1]-lista2[1])**2)
+
 #Criando a colisão do abacaxi
 def colisao(lista1,lista2):
-    distancia = math.sqrt((lista1[0]-lista2[0])**2 + (lista1[1]-lista2[1])**2)
-
-    if distancia <= 74:
+    if calculaDistancia(lista1,lista2) <= 74:
         return True
     else:
         return False

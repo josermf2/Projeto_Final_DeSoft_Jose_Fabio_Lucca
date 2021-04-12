@@ -112,44 +112,39 @@ class Automoveis:
             self.posicaoy += self.velocidade
             self.retangulo.top = self.posicaoy 
 
-    #Criando a classe da rua 1
-class Rua1:
-    def __init__(self,velocidade):
+#Criando a classe da rua
+class Rua:
+    def __init__(self,velocidade,numeroRua):
         self.velocidade = velocidade
-        self.carro = Automoveis(1, velocidade)
+        self.carro = Automoveis(numeroRua,velocidade)
         self.carro.movimentacao()
 
-#Criando a classe da rua 2
-class Rua2:
-    def __init__(self,velocidade): 
-        self.velocidade = velocidade
-        self.carro = Automoveis(2, velocidade)
-        self.carro.movimentacao()
+#Criando a subclasse da rua 1
+class Rua1(Rua):
+    def __init__(self, velocidade):
+        super().__init__(velocidade, 1)
 
-#Criando a classe da rua 3
-class Rua3:
-    def __init__(self,velocidade): 
-        self.velocidade = velocidade
-        self.carro = Automoveis(3, velocidade)
-        self.carro.movimentacao()
+#Criando a subclasse da rua 2
+class Rua2(Rua):
+    def __init__(self, velocidade):
+        super().__init__(velocidade, 2)
 
-#Criando a classe da rua 4
-class Rua4:
-    def __init__(self,velocidade): 
-        self.velocidade = velocidade
-        self.carro = Automoveis(4, velocidade)
-        self.carro.movimentacao() 
+#Criando a subclasse da rua 3
+class Rua3(Rua):
+    def __init__(self, velocidade):
+        super().__init__(velocidade, 3)
 
-#Criando a classe da rua 5
-class Rua5:
-    def __init__(self,velocidade): 
-        self.velocidade = velocidade
-        self.carro = Automoveis(5, velocidade)
-        self.carro.movimentacao()
+#Criando a subclasse da rua 4
+class Rua4(Rua):
+    def __init__(self, velocidade):
+        super().__init__(velocidade, 4)
 
-#Criando a classe da rua 6
-class Rua6:
-    def __init__(self,velocidade): 
-        self.velocidade = velocidade
-        self.carro = Automoveis(6, velocidade)
-        self.carro.movimentacao()   
+#Criando a subclasse da rua 5
+class Rua5(Rua):
+    def __init__(self, velocidade):
+        super().__init__(velocidade, 5)
+
+#Criando a subclasse da rua 6
+class Rua6(Rua):
+    def __init__(self, velocidade):
+        super().__init__(velocidade, 6)
