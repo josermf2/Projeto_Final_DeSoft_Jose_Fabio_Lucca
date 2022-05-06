@@ -179,7 +179,7 @@ while Foxer:
                     enter_sound()
                     cenario10 = True
                     cenarios = False
-                elif evento.key == pygame.K_2 or evento.key == pygame.K_DOWN: #evento para escolher cenário 2
+                elif evento.key == pygame.K_2 or evento.key == pygame.K_UP: #evento para escolher cenário 2
                     enter_sound()
                     cenario20 = True
                     cenarios = False
