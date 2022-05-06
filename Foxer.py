@@ -144,7 +144,7 @@ while Foxer:
                 Foxer = False
                 sys.exit()
             if evento.type == pygame.KEYDOWN:
-                if evento.key == pygame.K_RETURN or evento.key == pygame.K_KP_ENTER: #evento de início do jogo
+                if evento.key == pygame.K_RETURN or evento.key == pygame.K_DOWN: #evento de início do jogo
                     enter_sound()
                     #Resetando parâmetros do jogo
                     abacaxi_objeto = Frutas(random.choice(lista_abacaxi)) 
@@ -175,15 +175,15 @@ while Foxer:
                 Foxer = False
                 sys.exit()
             if evento.type == pygame.KEYDOWN:
-                if evento.key == pygame.K_1 or evento.key == pygame.K_KP1: #evento para escolher cenário 1
+                if evento.key == pygame.K_1 or evento.key == pygame.K_LEFT: #evento para escolher cenário 1
                     enter_sound()
                     cenario10 = True
                     cenarios = False
-                elif evento.key == pygame.K_2 or evento.key == pygame.K_KP2: #evento para escolher cenário 2
+                elif evento.key == pygame.K_2 or evento.key == pygame.K_DOWN: #evento para escolher cenário 2
                     enter_sound()
                     cenario20 = True
                     cenarios = False
-                elif evento.key == pygame.K_3 or evento.key == pygame.K_KP3: #evento para escolher cenário 3
+                elif evento.key == pygame.K_3 or evento.key == pygame.K_RIGHT: #evento para escolher cenário 3
                     enter_sound()
                     cenario30 = True
                     cenarios = False    
@@ -388,7 +388,7 @@ while Foxer:
                 Foxer = False
                 sys.exit()
             elif evento.type == pygame.KEYDOWN:
-                if evento.key == pygame.K_RETURN or evento.key == pygame.K_KP_ENTER: #evento de restart do jogo
+                if evento.key == pygame.K_RETURN or evento.key == pygame.K_UP: #evento de restart do jogo
                     enter_sound() #implementando o som do reinício do jogo
                     abacaxi_objeto = Frutas(random.choice(lista_abacaxi))
                     game_over = False 
